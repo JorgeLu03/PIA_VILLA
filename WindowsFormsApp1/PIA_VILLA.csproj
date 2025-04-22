@@ -47,6 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAO\Clientes_DAO.cs" />
+    <Compile Include="DAO\Hoteles_DAO.cs" />
+    <Compile Include="DAO\TiposDeHabitacion_DAO.cs" />
     <Compile Include="DAO\Usuarios_DAO.cs" />
     <Compile Include="EnlaceDB.cs" />
     <Compile Include="MODELOS\Amenidades.cs" />

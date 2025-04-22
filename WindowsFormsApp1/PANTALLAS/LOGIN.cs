@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WindowsFormsApp1.DAO;
 using WindowsFormsApp1.MODELOS;
 using WindowsFormsApp1.PANTALLAS;
 
@@ -35,7 +34,7 @@ namespace PIA_VILLA
             loginPSW.Contraseña = TB_PSW.Text;
 
             Usuarios_DAO usuarioDAO = new Usuarios_DAO();
-            DataTable inicses = usuarioDAO.LoginUsuario(login.NumNómina.ToString(), loginPSW.Contraseña);
+            DataTable inicses = usuarioDAO.sp_LoginUsuario(login.NumNómina.ToString(), loginPSW.Contraseña);
             if (inicses.Rows.Count > 0)
             {
                 DataRow row = inicses.Rows[0]; // Obtener la primera fila del resultado

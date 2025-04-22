@@ -11,7 +11,7 @@ using System.Configuration;
 
 namespace PIA_VILLA
 {
-    internal class Usuarios_DAO
+    internal class Clientes_DAO
     {
         private SqlConnection _conexion;
         private SqlCommand _comandosql;
@@ -32,47 +32,15 @@ namespace PIA_VILLA
             }
         }
 
-        public DataTable sp_LoginUsuario(string numNomina, string contrasena)
+        public DataTable sp_GetClientes()
         {
-            var msg = "";
+            string msg = "";
             DataTable tablaResultado = new DataTable();
             try
             {
-                conectar();
-                string qry = "sp_LoginUsuario";
-                _comandosql = new SqlCommand(qry, _conexion);
-                _comandosql.CommandType = CommandType.StoredProcedure;
-                _comandosql.CommandTimeout = 1200;
+                conectar(); // Método tuyo para abrir conexión
+                string qry = "sp_GetClientes";
 
-                // Agregar los parámetros al stored procedure
-                _comandosql.Parameters.Add("@NumNomina", SqlDbType.VarChar, 10).Value = numNomina;
-                _comandosql.Parameters.Add("@Contrasena", SqlDbType.VarChar, 20).Value = contrasena;
-
-                // Utilizar el adaptador para llenar la tabla con el resultado del SP
-                _adaptador = new SqlDataAdapter(_comandosql);
-                _adaptador.Fill(tablaResultado);
-            }
-            catch (SqlException e)
-            {
-                msg = "Error al intentar iniciar sesión: \n";
-                msg += e.Message;
-                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                desconectar();
-            }
-            return tablaResultado;
-        }
-
-        public DataTable sp_GetUsuarios()
-        {
-            var msg = "";
-            DataTable tablaResultado = new DataTable();
-            try
-            {
-                conectar();
-                string qry = "sp_GetUsuarios";
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 1200;
@@ -82,24 +50,35 @@ namespace PIA_VILLA
             }
             catch (SqlException e)
             {
-                msg = "Error al obtener usuarios activos: \n";
-                msg += e.Message;
+                msg = "Error al obtener los datos de los clientes: \n" + e.Message;
                 MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
-                desconectar();
+                desconectar(); // Método tuyo para cerrar conexión
             }
             return tablaResultado;
         }
 
-        public void sp_GestionEmpleado(char opcion, string nombre, DateTime fechaNac, string correo, string puesto, int numNomina, string tel, string contrasena)
+        public void sp_GestionCliente(
+          char opcion,
+          string nombre,
+          DateTime fechaNac,
+          string correo,
+          string edoCivil,
+          string rfc,
+          string tel,
+          string cel,
+          string ciudad,
+          string estado,
+          string pais
+      )
         {
             string msg = "";
             try
             {
                 conectar();
-                string qry = "sp_GestionUsuarios";
+                string qry = "sp_GestionClientes"; // Asegúrate de que este sea el nombre correcto de tu SP
                 _comandosql = new SqlCommand(qry, _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
                 _comandosql.CommandTimeout = 1200;
@@ -109,17 +88,20 @@ namespace PIA_VILLA
                 _comandosql.Parameters.Add("@nombre", SqlDbType.VarChar, 30).Value = nombre;
                 _comandosql.Parameters.Add("@fechanac", SqlDbType.Date).Value = fechaNac;
                 _comandosql.Parameters.Add("@correo", SqlDbType.VarChar, 30).Value = correo;
-                _comandosql.Parameters.Add("@puesto", SqlDbType.VarChar, 30).Value = puesto;
-                _comandosql.Parameters.Add("@numnomina", SqlDbType.Int).Value = numNomina;
-                _comandosql.Parameters.Add("@tel", SqlDbType.VarChar).Value = tel;
-                _comandosql.Parameters.Add("@contrasena", SqlDbType.VarChar, 20).Value = contrasena ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@edocivil", SqlDbType.VarChar, 20).Value = edoCivil ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@rfc", SqlDbType.VarChar, 20).Value = rfc ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@tel", SqlDbType.VarChar, 20).Value = tel ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@cel", SqlDbType.VarChar, 20).Value = cel ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@ciudad", SqlDbType.VarChar, 30).Value = ciudad ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@estado", SqlDbType.VarChar, 30).Value = estado ?? (object)DBNull.Value;
+                _comandosql.Parameters.Add("@pais", SqlDbType.VarChar, 30).Value = pais ?? (object)DBNull.Value;
 
                 // Ejecutar sin resultados
                 _comandosql.ExecuteNonQuery();
             }
             catch (SqlException ex)
             {
-                msg = "Error al ejecutar el procedimiento SP_GESTION_EMPLEADO:\n" + ex.Message;
+                msg = "Error al ejecutar el procedimiento SP_GESTION_CLIENTE:\n" + ex.Message;
                 MessageBox.Show(msg, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -135,5 +117,8 @@ namespace PIA_VILLA
 
 
 
-    }
+
+
+
+        }
 }
