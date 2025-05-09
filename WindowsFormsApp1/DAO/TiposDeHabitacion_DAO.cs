@@ -94,29 +94,22 @@ namespace PIA_VILLA
         }
 
         // Dentro de tu clase TiposDeHabitacion_DAO
-        public DataTable sp_GetTiposHabPorHotel(int idHotel, int opcion)
+        public DataTable sp_GetTiposHabPorHotel(int idHotel, int opcion, int? idTipoHab = null)
         {
-            DataTable tabla = new DataTable();
+            DataTable dt = new DataTable();
             try
             {
                 Conectar();
                 _comandosql = new SqlCommand("sp_GetTiposHab", _conexion);
                 _comandosql.CommandType = CommandType.StoredProcedure;
-                _comandosql.Parameters.AddWithValue("@IDHotel", SqlDbType.Int).Value = idHotel;
-                _comandosql.Parameters.AddWithValue("@opcion", SqlDbType.Int).Value = opcion; // Establecemos la opción a 1
+                _comandosql.Parameters.AddWithValue("@IDHotel", idHotel);
+                _comandosql.Parameters.AddWithValue("@opcion", opcion);
+                _comandosql.Parameters.AddWithValue("@IDTipoHab", (object)idTipoHab ?? DBNull.Value);
                 _adaptador = new SqlDataAdapter(_comandosql);
-                _adaptador.Fill(tabla);
+                _adaptador.Fill(dt);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error al obtener los tipos de habitación por hotel: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return null;
-            }
-            finally
-            {
-                Desconectar();
-            }
-            return tabla;
+            finally { Desconectar(); }
+            return dt;
         }
 
         public void GestionTipoHabitacion(char opcion, int? idTipoHab, int? idHotel, int? capacidad, string nivel, int? numCamas, string tipoCamas, decimal? costo, int? cantidad, string cadenaAmenidades,string cadenaCaracteristicas)

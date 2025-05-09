@@ -106,6 +106,7 @@
             this.BTN_DEL.TabIndex = 31;
             this.BTN_DEL.Text = "ELIMINAR";
             this.BTN_DEL.UseVisualStyleBackColor = true;
+            this.BTN_DEL.Click += new System.EventHandler(this.BTN_DEL_Click);
             // 
             // BTN_MOD
             // 
@@ -116,6 +117,7 @@
             this.BTN_MOD.TabIndex = 30;
             this.BTN_MOD.Text = "MODIFICAR";
             this.BTN_MOD.UseVisualStyleBackColor = true;
+            this.BTN_MOD.Click += new System.EventHandler(this.BTN_MOD_Click);
             // 
             // BTN_ADD
             // 

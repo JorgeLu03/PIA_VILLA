@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DAO\Clientes_DAO.cs" />
     <Compile Include="DAO\Hoteles_DAO.cs" />
+    <Compile Include="DAO\Reservaciones_DAO.cs" />
     <Compile Include="DAO\TiposDeHabitacion_DAO.cs" />
     <Compile Include="DAO\Usuarios_DAO.cs" />
     <Compile Include="EnlaceDB.cs" />
@@ -148,6 +149,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Validaciones.cs" />
     <EmbeddedResource Include="PANTALLAS\CANCELACIONES.resx">
       <DependentUpon>CANCELACIONES.cs</DependentUpon>
     </EmbeddedResource>
