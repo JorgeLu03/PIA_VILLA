@@ -60,6 +60,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.BTN_CLS = new System.Windows.Forms.Button();
+            this.BTN_CLF = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DG_CLIENTES)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DG_HOTELES)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_CANTHAB)).BeginInit();
@@ -74,6 +75,7 @@
             this.TB_BUSQ.Name = "TB_BUSQ";
             this.TB_BUSQ.Size = new System.Drawing.Size(181, 22);
             this.TB_BUSQ.TabIndex = 0;
+            this.TB_BUSQ.TextChanged += new System.EventHandler(this.TB_BUSQ_TextChanged);
             // 
             // label1
             // 
@@ -92,6 +94,7 @@
             this.CB_CD.Name = "CB_CD";
             this.CB_CD.Size = new System.Drawing.Size(121, 24);
             this.CB_CD.TabIndex = 2;
+            this.CB_CD.SelectedIndexChanged += new System.EventHandler(this.CB_CD_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -105,6 +108,7 @@
             // 
             // DG_CLIENTES
             // 
+            this.DG_CLIENTES.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_CLIENTES.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_CLIENTES.Location = new System.Drawing.Point(95, 91);
             this.DG_CLIENTES.Name = "DG_CLIENTES";
@@ -115,6 +119,7 @@
             // 
             // DG_HOTELES
             // 
+            this.DG_HOTELES.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_HOTELES.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_HOTELES.Location = new System.Drawing.Point(95, 299);
             this.DG_HOTELES.Name = "DG_HOTELES";
@@ -234,6 +239,7 @@
             // 
             // DG_CAR
             // 
+            this.DG_CAR.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_CAR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_CAR.Location = new System.Drawing.Point(810, 485);
             this.DG_CAR.Name = "DG_CAR";
@@ -244,6 +250,7 @@
             // 
             // DG_TIPOHAB
             // 
+            this.DG_TIPOHAB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_TIPOHAB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_TIPOHAB.Location = new System.Drawing.Point(810, 299);
             this.DG_TIPOHAB.Name = "DG_TIPOHAB";
@@ -321,6 +328,7 @@
             this.CB_BUSQ.Name = "CB_BUSQ";
             this.CB_BUSQ.Size = new System.Drawing.Size(121, 24);
             this.CB_BUSQ.TabIndex = 61;
+            this.CB_BUSQ.SelectedIndexChanged += new System.EventHandler(this.CB_BUSQ_SelectedIndexChanged);
             // 
             // label14
             // 
@@ -365,11 +373,23 @@
             this.BTN_CLS.Text = "LIMPIAR";
             this.BTN_CLS.UseVisualStyleBackColor = true;
             // 
+            // BTN_CLF
+            // 
+            this.BTN_CLF.Font = new System.Drawing.Font("Montserrat Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CLF.Location = new System.Drawing.Point(557, 258);
+            this.BTN_CLF.Name = "BTN_CLF";
+            this.BTN_CLF.Size = new System.Drawing.Size(78, 37);
+            this.BTN_CLF.TabIndex = 66;
+            this.BTN_CLF.Text = "LIMPIAR";
+            this.BTN_CLF.UseVisualStyleBackColor = true;
+            this.BTN_CLF.Click += new System.EventHandler(this.BTN_CLF_Click);
+            // 
             // RESERVACIONES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1439, 691);
+            this.Controls.Add(this.BTN_CLF);
             this.Controls.Add(this.BTN_CLS);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
@@ -448,5 +468,6 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button BTN_CLS;
+        private System.Windows.Forms.Button BTN_CLF;
     }
 }

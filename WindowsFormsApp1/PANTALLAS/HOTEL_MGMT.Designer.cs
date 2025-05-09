@@ -68,6 +68,7 @@
             // 
             // DG_HOTEL
             // 
+            this.DG_HOTEL.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_HOTEL.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_HOTEL.Location = new System.Drawing.Point(106, 320);
             this.DG_HOTEL.Name = "DG_HOTEL";

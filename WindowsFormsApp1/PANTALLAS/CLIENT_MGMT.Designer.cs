@@ -72,6 +72,7 @@
             // 
             // DG_CLIENTES
             // 
+            this.DG_CLIENTES.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_CLIENTES.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_CLIENTES.Location = new System.Drawing.Point(87, 288);
             this.DG_CLIENTES.Name = "DG_CLIENTES";

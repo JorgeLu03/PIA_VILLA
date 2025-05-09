@@ -171,6 +171,33 @@ namespace PIA_VILLA
             return nombresServicios;
         }
 
+        public DataTable sp_BuscarHotel(string ciudad)
+        {
+            var tabla = new DataTable();
+            try
+            {
+                conectar();
+                using (var cmd = new SqlCommand("sp_BuscarHotel", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Ciudad", ciudad);
+                    using (_adaptador = new SqlDataAdapter(cmd))
+                    {
+                        _adaptador.Fill(tabla);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener hoteles por ciudad: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                desconectar();
+            }
+            return tabla;
+        }
 
 
     }

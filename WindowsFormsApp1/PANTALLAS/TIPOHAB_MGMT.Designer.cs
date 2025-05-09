@@ -74,6 +74,7 @@
             // 
             // DG_TIPOHAB
             // 
+            this.DG_TIPOHAB.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_TIPOHAB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_TIPOHAB.Location = new System.Drawing.Point(61, 306);
             this.DG_TIPOHAB.Name = "DG_TIPOHAB";
@@ -273,6 +274,7 @@
             // 
             // DG_CAR
             // 
+            this.DG_CAR.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_CAR.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_CAR.Location = new System.Drawing.Point(873, 306);
             this.DG_CAR.Name = "DG_CAR";
