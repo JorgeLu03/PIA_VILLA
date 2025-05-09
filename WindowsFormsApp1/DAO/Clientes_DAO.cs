@@ -110,15 +110,41 @@ namespace PIA_VILLA
             }
         }
 
-
-
-
-
-
-
-
-
-
-
+        public DataTable sp_BuscarClientes(char opcion, string termino)
+        {
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                using (var cmd = new SqlCommand("sp_BuscarClientes", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@Opcion", opcion);
+                    cmd.Parameters.AddWithValue("@Termino", termino);
+                    using (var da = new SqlDataAdapter(cmd))
+                        da.Fill(tabla);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al buscar clientes: {ex.Message}",
+                                "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                desconectar();
+            }
+            return tabla;
         }
+
+
+
+
+
+
+
+
+
+
+    }
 }
