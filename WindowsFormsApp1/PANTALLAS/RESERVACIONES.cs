@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.MODELOS;
 
 namespace WindowsFormsApp1.PANTALLAS
 {
@@ -27,6 +28,8 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void RESERVACIONES_Load(object sender, EventArgs e)
         {
+            OcultarLabelsFactura();
+
             var con = new Clientes_DAO();
             var TabClients = new DataTable();
             TabClients = con.sp_GetClientes();
@@ -199,6 +202,218 @@ namespace WindowsFormsApp1.PANTALLAS
             DG_HOTELES.Columns["IDHotel"].Visible = false;
             DG_HOTELES.Columns["Inicio_de_Operaciones"].Visible = false;
             DG_HOTELES.Columns["Usuario_Registro"].Visible = false;
+        }
+
+        private void DG_CLIENTES_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void BTN_CLS_Click(object sender, EventArgs e)
+        {
+        LimpiarCamposReserva();
+        }
+
+        private void LimpiarCamposReserva()
+        {
+            NUD_CANTPER.Value = 0;
+            NUD_CANTHAB.Value = 0;
+            TB_ANTICIPO.Text = "";
+            DTP_ENTRADA.Value = DateTime.Now;
+            DTP_SALIDA.Value = DateTime.Now;
+            TB_BUSQ.Text = "";
+            CB_BUSQ.Items.Clear();
+            CB_BUSQ.Items.Add("");
+            CB_BUSQ.Items.Add("RFC");
+            CB_BUSQ.Items.Add("Correo");
+            CB_BUSQ.Items.Add("Nombre");
+            CB_BUSQ.SelectedIndex = 0;
+            CB_CD.SelectedIndex = -1;
+            var conn = new Hoteles_DAO();
+            var TabHoteles = new DataTable();
+            TabHoteles = conn.sp_GetHoteles();
+            DG_HOTELES.DataSource = TabHoteles;
+            DG_HOTELES.Columns["IDHotel"].Visible = false;
+            DG_HOTELES.Columns["Inicio_de_Operaciones"].Visible = false;
+            DG_HOTELES.Columns["Usuario_Registro"].Visible = false;
+
+            // Limpiar DataGridView de tipos de habitación y características
+            DG_TIPOHAB.DataSource = null;
+            DG_CAR.DataSource = null;
+            OcultarLabelsFactura();
+        }
+        private void BTN_RSV_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Validar que haya una fila seleccionada en cada DataGridView
+                if (DG_CLIENTES.CurrentRow == null ||
+                    DG_HOTELES.CurrentRow == null ||
+                    DG_TIPOHAB.CurrentRow == null)
+                {
+                    MessageBox.Show("Selecciona un cliente, hotel y tipo de habitación.");
+                    return;
+                }
+
+                string rfc = DG_CLIENTES.CurrentRow.Cells["RFC"].Value.ToString();
+                int idTipoHab = Convert.ToInt32(DG_TIPOHAB.CurrentRow.Cells["IDTipoHab"].Value);
+                int cantHab = (int)NUD_CANTHAB.Value;
+                int numPersonas = (int)NUD_CANTPER.Value;
+                DateTime entrada = DTP_ENTRADA.Value;
+                DateTime salida = DTP_SALIDA.Value;
+                decimal anticipo = decimal.TryParse(TB_ANTICIPO.Text, out decimal result) ? result : 0;
+
+                // Este número deberías obtenerlo del login, por ejemplo:
+                int numNomina = SESIÓN.NumNómina; // ajusta según tu implementación
+
+                // Generar código de reservación (aleatorio de 8 caracteres)
+                string codRsv = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 8).ToUpper();
+
+                // Ejecutar
+                var dao = new Reservaciones_DAO();
+                dao.sp_RegistrarReservacion(codRsv, rfc, idTipoHab, cantHab, numPersonas, entrada, salida, numNomina, anticipo);
+
+                MessageBox.Show("Reservación registrada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LimpiarCamposReserva();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void label20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ActualizarFacturaPreview()
+        {
+            try
+            {
+                // Asegurarse de que haya una selección válida
+                if (DG_TIPOHAB.CurrentRow == null) return;
+
+                string hotel = DG_HOTELES.CurrentRow?.Cells["Nombre"].Value.ToString();
+                string tipoHab = DG_TIPOHAB.CurrentRow.Cells["Nivel"].Value.ToString();
+                int cantidadHab = (int)NUD_CANTHAB.Value;
+                DateTime fEntrada = DTP_ENTRADA.Value.Date;
+                DateTime fSalida = DTP_SALIDA.Value.Date;
+
+                // Calcular número de noches
+                int noches = (int)(fSalida - fEntrada).TotalDays;
+                if (noches <= 0) noches = 1;
+
+                int precio = Convert.ToInt32(DG_TIPOHAB.CurrentRow.Cells["Costo"].Value);
+                decimal costo = noches * cantidadHab * precio;
+                decimal iva = costo * 0.16m;
+                decimal total = costo + iva;
+
+                decimal anticipo = decimal.TryParse(TB_ANTICIPO.Text, out decimal result) ? result : 0;
+                decimal restante = total - anticipo;
+
+                // Asignar valores
+                lbHotel.Text = hotel;
+                lbTipoHab.Text = tipoHab;
+                lbCantHab.Text = cantidadHab.ToString();
+                lbFEn.Text = fEntrada.ToShortDateString();
+                lbFSal.Text = fSalida.ToShortDateString();
+                lbCost.Text = costo.ToString("C");
+                lbIVA.Text = iva.ToString("C");
+                lbCostFin.Text = total.ToString("C");
+                lbMiss.Text = restante.ToString("C");
+
+                // Solo hacer visibles los labels si antes estaban ocultos
+                if (!lbHotel.Visible)
+                {
+                    lbHotel.Visible = true;
+                    lbTipoHab.Visible = true;
+                    lbCantHab.Visible = true;
+                    lbFEn.Visible = true;
+                    lbFSal.Visible = true;
+                    lbCost.Visible = true;
+                    lbIVA.Visible = true;
+                    lbCostFin.Visible = true;
+                    lbMiss.Visible = true;
+                }
+
+            }
+            catch
+            {
+                // Ignorar errores durante actualización en tiempo real
+            }
+        }
+
+        private void OcultarLabelsFactura()
+        {
+            lbHotel.Visible = false;
+            lbTipoHab.Visible = false;
+            lbCantHab.Visible = false;
+            lbFEn.Visible = false;
+            lbFSal.Visible = false;
+            lbCost.Visible = false;
+            lbIVA.Visible = false;
+            lbCostFin.Visible = false;
+            lbMiss.Visible = false;
+        }
+        private void DG_CLIENTES_SelectionChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void DG_HOTELES_SelectionChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void DG_TIPOHAB_SelectionChanged(object sender, EventArgs e)
+        {
+            if (DG_TIPOHAB.CurrentRow != null)
+            {
+                ActualizarFacturaPreview();
+            }
+        }
+
+        private void DTP_ENTRADA_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void DTP_SALIDA_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void NUD_CANTPER_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void NUD_CANTHAB_ValueChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void TB_ANTICIPO_TextChanged(object sender, EventArgs e)
+        {
+            ActualizarFacturaPreview();
+
+        }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbCostFin_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

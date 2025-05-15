@@ -59,6 +59,36 @@ namespace PIA_VILLA
             return tablaCiudades;
         }
 
+        public void sp_RegistrarReservacion(string codRsv, string rfc, int idTipoHab, int cantHab, int numPersonas, DateTime entrada, DateTime salida, int numNomina, decimal anticipo)
+        {
+            try
+            {
+                conectar();
+                SqlCommand cmd = new SqlCommand("sp_RegistrarReservacion", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CodRsv", codRsv);
+                cmd.Parameters.AddWithValue("@RFC", rfc);
+                cmd.Parameters.AddWithValue("@IDTipoHab", idTipoHab);
+                cmd.Parameters.AddWithValue("@CantHab", cantHab);
+                cmd.Parameters.AddWithValue("@NumPersonas", numPersonas);
+                cmd.Parameters.AddWithValue("@FEntrada", entrada);
+                cmd.Parameters.AddWithValue("@FSalida", salida);
+                cmd.Parameters.AddWithValue("@NumNomina", numNomina);
+                cmd.Parameters.AddWithValue("@Anticipo", anticipo);
+
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al registrar reservación: " + ex.Message);
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
+
 
     }
 }
