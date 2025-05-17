@@ -102,7 +102,7 @@ namespace WindowsFormsApp1.PANTALLAS
                     }
                 }
 
-                MessageBox.Show("Hotel registrado exitosamente.");
+                MessageBox.Show($"Hotel registrado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var TabHoteles = new DataTable();
                 TabHoteles = con.sp_GetHoteles();
                 DG_HOTEL.DataSource = TabHoteles;
@@ -111,7 +111,7 @@ namespace WindowsFormsApp1.PANTALLAS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: " + ex.Message);
+                MessageBox.Show("Error al registrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -126,7 +126,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
                     con.sp_GestionHoteles('E', "", idHotel, "", 0, DateTime.Now, 0, "", "", "", "");
 
-                    MessageBox.Show("Hotel eliminado correctamente.");
+                    MessageBox.Show($"Hotel eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     var TabHoteles = new DataTable();
                     TabHoteles = con.sp_GetHoteles();
@@ -136,12 +136,12 @@ namespace WindowsFormsApp1.PANTALLAS
                 }
                 else
                 {
-                    MessageBox.Show("Por favor selecciona un hotel para eliminar.");
+                    MessageBox.Show("Por favor selecciona un hotel para eliminar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar: " + ex.Message);
+                MessageBox.Show("Error al eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
         }
@@ -209,7 +209,7 @@ namespace WindowsFormsApp1.PANTALLAS
                         }
                     }
 
-                    MessageBox.Show("Hotel modificado exitosamente.");
+                    MessageBox.Show($"Hotel modificado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     var TabHoteles = new DataTable();
                     TabHoteles = con.sp_GetHoteles();
@@ -218,18 +218,17 @@ namespace WindowsFormsApp1.PANTALLAS
                 }
                 else
                 {
-                    MessageBox.Show("Por favor, selecciona un hotel para modificar.");
+                    MessageBox.Show("Por favor, selecciona un hotel para modificar.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al modificar el hotel: " + ex.Message);
+                MessageBox.Show("Error al modificar el hotel: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
         private void DG_HOTEL_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Verificar que el clic no sea en la fila de encabezado
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow fila = DG_HOTEL.Rows[e.RowIndex];

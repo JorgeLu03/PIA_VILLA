@@ -273,7 +273,7 @@ namespace WindowsFormsApp1.PANTALLAS
                 var dao = new Reservaciones_DAO();
                 dao.sp_RegistrarReservacion(codRsv, rfc, idTipoHab, cantHab, numPersonas, entrada, salida, numNomina, anticipo);
 
-                MessageBox.Show("Reservación registrada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Reservación registrada con éxito.\nNúmero de reservación: {codRsv}", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LimpiarCamposReserva();
             }
             catch (Exception ex)
@@ -412,6 +412,11 @@ namespace WindowsFormsApp1.PANTALLAS
         }
 
         private void lbCostFin_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbHotel_Click(object sender, EventArgs e)
         {
 
         }

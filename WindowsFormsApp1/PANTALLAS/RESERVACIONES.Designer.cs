@@ -481,6 +481,7 @@
             this.lbHotel.TabIndex = 74;
             this.lbHotel.Text = "label";
             this.lbHotel.Visible = false;
+            this.lbHotel.Click += new System.EventHandler(this.lbHotel_Click);
             // 
             // label23
             // 

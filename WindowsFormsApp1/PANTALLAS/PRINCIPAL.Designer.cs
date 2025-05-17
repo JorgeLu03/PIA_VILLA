@@ -290,6 +290,7 @@
             this.label10.TabIndex = 18;
             this.label10.Text = "label10";
             this.label10.Visible = false;
+            this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
             // PRINCIPAL
             // 

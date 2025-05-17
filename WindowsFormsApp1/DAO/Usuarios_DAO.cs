@@ -65,6 +65,33 @@ namespace PIA_VILLA
             return tablaResultado;
         }
 
+        public DataTable sp_GetBlockUsers()
+        {
+            var msg = "";
+            DataTable tablaResultado = new DataTable();
+            try
+            {
+                conectar();
+                string qry = "sp_GetBlockUsers";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.CommandType = CommandType.StoredProcedure;
+                _comandosql.CommandTimeout = 1200;
+
+                _adaptador = new SqlDataAdapter(_comandosql);
+                _adaptador.Fill(tablaResultado);
+            }
+            catch (SqlException e)
+            {
+                msg = "Error al obtener usuarios activos: \n";
+                msg += e.Message;
+                MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                desconectar();
+            }
+            return tablaResultado;
+        }
         public DataTable sp_GetUsuarios()
         {
             var msg = "";
@@ -128,6 +155,28 @@ namespace PIA_VILLA
             }
         }
 
+        public void HabilitarUsuario(int numNomina)
+        {
+            string msg = "";
+            try
+            {
+                conectar();
+                string qry = "UPDATE Usuarios SET Estatus = 1, IntentosFallidos = 0 WHERE NumNómina = @NumNomina";
+                _comandosql = new SqlCommand(qry, _conexion);
+                _comandosql.Parameters.Add("@NumNomina", SqlDbType.Int).Value = numNomina;
+
+                _comandosql.ExecuteNonQuery();
+            }
+            catch (SqlException ex)
+            {
+                msg = "Error al habilitar usuario:\n" + ex.Message;
+                MessageBox.Show(msg, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
 
 
 

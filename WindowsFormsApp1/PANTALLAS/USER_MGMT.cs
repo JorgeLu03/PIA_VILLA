@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApp1.MODELOS;
 
 namespace WindowsFormsApp1.PANTALLAS
 {
@@ -46,7 +48,12 @@ namespace WindowsFormsApp1.PANTALLAS
             var con = new Usuarios_DAO();
             var TabUsers = new DataTable();
             TabUsers = con.sp_GetUsuarios();
-            DG_USERS.DataSource = TabUsers;
+            DG_USERS.DataSource = TabUsers; 
+
+            var TabBlock = new DataTable();
+            TabBlock = con.sp_GetBlockUsers();
+            DG_BLCK.DataSource = TabBlock;
+
 
         }
 
@@ -141,7 +148,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
                 con.sp_GestionEmpleado(opcion, nombre, fechaNac, correo, puesto, numNomina, tel, contrasena);
 
-                MessageBox.Show("Usuario registrado exitosamente.");
+                MessageBox.Show($"Usuario registrado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TB_CORREO.Text = "";
                 TB_NAME.Text = "";
                 DTP_FECHANAC.Text = "";
@@ -155,7 +162,7 @@ namespace WindowsFormsApp1.PANTALLAS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: " + ex.Message);
+                MessageBox.Show("Error al registrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -170,7 +177,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
                     con.sp_GestionEmpleado('E', "", DateTime.Now, "", "", numNomina, "", null);
 
-                    MessageBox.Show("Usuario eliminado correctamente.");
+                    MessageBox.Show($"Usuario eliminado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     TB_CORREO.Text = "";
                     TB_NAME.Text = "";
                     DTP_FECHANAC.Text = "";
@@ -184,12 +191,12 @@ namespace WindowsFormsApp1.PANTALLAS
                 }
                 else
                 {
-                    MessageBox.Show("Por favor selecciona un usuario para eliminar.");
+                    MessageBox.Show("Por favor selecciona un usuario para eliminar.","Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar: " + ex.Message);
+                MessageBox.Show("Error al eliminar: " + ex.Message,"Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -267,15 +274,52 @@ namespace WindowsFormsApp1.PANTALLAS
 
                 con.sp_GestionEmpleado(opcion, nombre, fechaNac, correo, puesto, numNomina, tel, contrasena);
 
-                MessageBox.Show("Usuario modificado exitosamente.");
+                MessageBox.Show($"Usuario modificado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var TabUsers = new DataTable();
                 TabUsers = con.sp_GetUsuarios();
                 DG_USERS.DataSource = TabUsers;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al modificar: " + ex.Message);
+                MessageBox.Show("Error al modificar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
+
+        private void BTN_DESBLOQUEAR_Click(object sender, EventArgs e)
+        {
+            var con = new Usuarios_DAO();
+            try
+            {
+                if (DG_BLCK.SelectedCells.Count > 0) // Verifica si hay alguna celda seleccionada
+                {
+                    // Obtiene el índice de la fila de la primera celda seleccionada.
+                    int rowIndex = DG_BLCK.SelectedCells[0].RowIndex;
+
+                    // Obtiene el valor de la celda "Número_de_Nómina" de la fila seleccionada.
+                    int numNomina = Convert.ToInt32(DG_BLCK.Rows[rowIndex].Cells["Número_de_Nómina"].Value);
+
+                    con.HabilitarUsuario(numNomina);
+
+                    MessageBox.Show($"Usuario desbloqueado exitosamente", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Refresca la lista de usuarios bloqueados y activos
+                    var TabBlock = con.sp_GetBlockUsers();
+                    DG_BLCK.DataSource = TabBlock;
+
+                    var TabUsers = con.sp_GetUsuarios();
+                    DG_USERS.DataSource = TabUsers;
+                }
+                else
+                {
+                    MessageBox.Show("Selecciona un usuario para desbloquear.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al habilitar usuario", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
     }
 }

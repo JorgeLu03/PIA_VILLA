@@ -110,5 +110,10 @@ namespace WindowsFormsApp1.PANTALLAS
                 BTN_REP.Visible = false;
             }
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

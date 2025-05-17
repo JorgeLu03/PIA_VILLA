@@ -31,8 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CANCELACIONES));
             this.button4 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.TB_COD = new System.Windows.Forms.TextBox();
+            this.BTN_CAN = new System.Windows.Forms.Button();
+            this.DG_RSV = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.DG_RSV)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
@@ -52,41 +54,55 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(159, 74);
+            this.label1.Location = new System.Drawing.Point(470, 74);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(188, 20);
             this.label1.TabIndex = 13;
             this.label1.Text = "CÓDIGO DE RESERVACIÓN";
             // 
-            // textBox1
+            // TB_COD
             // 
-            this.textBox1.Location = new System.Drawing.Point(163, 97);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(181, 22);
-            this.textBox1.TabIndex = 1;
+            this.TB_COD.Location = new System.Drawing.Point(474, 97);
+            this.TB_COD.Name = "TB_COD";
+            this.TB_COD.Size = new System.Drawing.Size(181, 22);
+            this.TB_COD.TabIndex = 1;
+            this.TB_COD.TextChanged += new System.EventHandler(this.TB_COD_TextChanged);
             // 
-            // button3
+            // BTN_CAN
             // 
-            this.button3.Font = new System.Drawing.Font("Montserrat Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(187, 150);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(132, 37);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "CANCELAR";
-            this.button3.UseVisualStyleBackColor = true;
+            this.BTN_CAN.Font = new System.Drawing.Font("Montserrat Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_CAN.Location = new System.Drawing.Point(498, 460);
+            this.BTN_CAN.Name = "BTN_CAN";
+            this.BTN_CAN.Size = new System.Drawing.Size(132, 37);
+            this.BTN_CAN.TabIndex = 2;
+            this.BTN_CAN.Text = "CANCELAR";
+            this.BTN_CAN.UseVisualStyleBackColor = true;
+            this.BTN_CAN.Click += new System.EventHandler(this.BTN_CAN_Click);
+            // 
+            // DG_RSV
+            // 
+            this.DG_RSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DG_RSV.Location = new System.Drawing.Point(119, 158);
+            this.DG_RSV.Name = "DG_RSV";
+            this.DG_RSV.RowHeadersWidth = 51;
+            this.DG_RSV.RowTemplate.Height = 24;
+            this.DG_RSV.Size = new System.Drawing.Size(890, 252);
+            this.DG_RSV.TabIndex = 14;
             // 
             // CANCELACIONES
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 247);
-            this.Controls.Add(this.button3);
+            this.ClientSize = new System.Drawing.Size(1123, 548);
+            this.Controls.Add(this.DG_RSV);
+            this.Controls.Add(this.BTN_CAN);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TB_COD);
             this.Controls.Add(this.button4);
             this.Name = "CANCELACIONES";
             this.Text = "CANCELACIONES";
             this.Load += new System.EventHandler(this.CANCELACIONES_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.DG_RSV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -96,7 +112,8 @@
 
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.TextBox TB_COD;
+        private System.Windows.Forms.Button BTN_CAN;
+        private System.Windows.Forms.DataGridView DG_RSV;
     }
 }
