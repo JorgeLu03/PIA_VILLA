@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <title>Factura</title>
     <style>
-
         body {
             font-family: Arial, sans-serif;
             font-size: 10pt;
@@ -29,15 +28,11 @@
             font-weight: bold;
         }
 
-        /* Tabla principal de detalles */
         .details-table {
-            width: 70%; /* Reducir el ancho para dejar espacio a la derecha */
+            width: 70%;
             border-collapse: collapse;
             margin-top: 10px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border-radius: 3px;
-            overflow: hidden;
-            float: left; /* Alinear a la izquierda */
+            float: left;
         }
 
             .details-table th, .details-table td {
@@ -51,7 +46,6 @@
                 background-color: #f8f9fa;
                 font-weight: bold;
                 color: #555;
-                font-size: 9pt;
             }
 
         .services-header th {
@@ -60,21 +54,19 @@
             text-align: left;
             border-top: 1px solid #ccc;
             border-bottom: 1px solid #ccc;
-            font-size: 9pt;
         }
 
-        /* Tabla de subtotales y ajustes */
         .totals-table {
-            width: 28%; /* Ancho para la tabla de subtotales y ajustes */
+            width: 28%;
             border-collapse: collapse;
             margin-top: 10px;
-            float: right; /* Alinear a la derecha */
+            float: right;
         }
 
             .totals-table th, .totals-table td {
                 border: 1px solid #ddd;
                 padding: 6px;
-                text-align: right; /* Alinear el texto a la derecha */
+                text-align: right;
                 font-size: 9pt;
             }
 
@@ -82,7 +74,6 @@
                 background-color: #f8f9fa;
                 font-weight: bold;
                 color: #555;
-                font-size: 9pt;
             }
 
         .total-row td {
@@ -92,23 +83,42 @@
         }
 
         .footer {
-            clear: both; /* Limpiar el float de las tablas */
+            clear: both;
             margin-top: 15px;
             text-align: center;
             font-size: 8pt;
             color: #777;
         }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 10pt;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .info-block {
+            font-size: 9pt;
+            margin: 4px 0;
+        }
     </style>
 </head>
 <body>
-    <h1>Hotel Villa</h1>
-    <p>Av. Principal 123, Ciudad, Estado</p>
-    <p>RFC: HVI123456XYZ</p>
-    <p>Tel: (123) 456-7890</p>
+    <h1>{NOMBRE_HOTEL}</h1>
 
-    <p style="text-align: left; margin-top: 15px;"><strong>Factura No:</strong> {FOLIO}</p>
+    <p>{DOMICILIO_HOTEL}</p>
+
+    <p style="text-align: left; margin-top: 15px;"><strong>Folio de factura:</strong> {FOLIO}</p>
     <p style="text-align: left;"><strong>Fecha:</strong> {FECHA}</p>
     <p style="text-align: left;"><strong>Código de Reservación:</strong> {COD_RSV}</p>
+    <p style="text-align: left;"><strong>Cliente:</strong> {CLIENTE}</p>
+    <p style="text-align: left;"><strong>RFC:</strong> {RFC}</p>
+
+    <p class="section-title">Detalles de la Estancia</p>
+    <div class="info-block"><strong>Fecha Entrada:</strong> {FECHA_ENTRADA}</div>
+    <div class="info-block"><strong>Fecha Salida:</strong> {FECHA_SALIDA}</div>
+    <div class="info-block"><strong>Check-In:</strong> {CHECKIN}</div>
+    <div class="info-block"><strong>Check-Out:</strong> {CHECKOUT}</div>
 
     <div style="overflow: auto;">
         <table class="details-table">
@@ -120,7 +130,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>Hospedaje</td>
+                    <td>Hospedaje en {NUM_HABITACIONES} habitaciones tipo {TIPO_HABITACION}</td>
                     <td>{COSTO_BRUTO}</td>
                 </tr>
                 <tr>
@@ -158,7 +168,7 @@
     </div>
 
     <div class="footer">
-        <p>Gracias por elegir Hotel Villa</p>
+        <p>Gracias por elegir {NOMBRE_HOTEL}</p>
         <p>Factura generada electrónicamente</p>
     </div>
 </body>

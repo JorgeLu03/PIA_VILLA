@@ -420,7 +420,7 @@ namespace PIA_VILLA
             return resultado;
         }
 
-        public void GenerateInvoicePDF(string codRsv, string serviciosAdicionales, decimal descuento)
+        public bool GenerateInvoicePDF(string codRsv, string serviciosAdicionales, decimal descuento)
         {
             try
             {
@@ -454,6 +454,8 @@ namespace PIA_VILLA
 
                 // Calcular subtotal e IVA
                 decimal costoBruto = Convert.ToDecimal(factura["CostoBruto"]);
+                decimal costoSinIVA = costoBruto / 1.16m;
+
                 decimal totalServicios = 0;
                 foreach (DataRow servicio in dtServicios.Rows)
                 {
@@ -462,9 +464,9 @@ namespace PIA_VILLA
                         totalServicios += Convert.ToDecimal(servicio["PrecioBase"]);
                     }
                 }
+                decimal iva = costoSinIVA * 0.16m;
                 decimal subtotal = costoBruto + totalServicios;
-                decimal iva = subtotal * 0.16m;
-
+                decimal totalFinal = subtotal - Convert.ToDecimal(factura["Anticipo"]);
                 // Generar las filas HTML de servicios
                 string serviciosRows = "";
                 foreach (DataRow servicio in dtServicios.Rows)
@@ -485,16 +487,28 @@ namespace PIA_VILLA
 
                 // Reemplazar marcadores
                 string htmlContent = htmlTemplate
-                    .Replace("{FOLIO}", factura["Folio"]?.ToString() ?? "N/A")
-                    .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy"))
-                    .Replace("{COD_RSV}", factura["Código_de_Reservación"]?.ToString() ?? "N/A")
-                    .Replace("{COSTO_BRUTO}", costoBruto.ToString("C2"))
-                    .Replace("{SERVICIOS_ROWS}", serviciosRows)
-                    .Replace("{SUBTOTAL}", subtotal.ToString("C2"))
-                    .Replace("{IVA}", iva.ToString("C2"))
-                    .Replace("{DESCUENTO}", Convert.ToDecimal(factura["Descuento"]).ToString("C2"))
-                    .Replace("{ANTICIPO}", Convert.ToDecimal(factura["Anticipo"]).ToString("C2"))
-                    .Replace("{COSTO_FINAL}", Convert.ToDecimal(factura["CostoFinal"]).ToString("C2"));
+                .Replace("{FOLIO}", factura["Folio"]?.ToString() ?? "N/A")
+                .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy"))
+                .Replace("{COD_RSV}", factura["Código_de_Reservación"]?.ToString() ?? "N/A")
+                .Replace("{CLIENTE}", factura["NombreCliente"]?.ToString() ?? "N/A")
+                .Replace("{RFC}", factura["RFC"]?.ToString() ?? "N/A")
+                .Replace("{COSTO_BRUTO}", costoSinIVA.ToString("C2"))
+                .Replace("{SERVICIOS_ROWS}", serviciosRows)
+                .Replace("{SUBTOTAL}", subtotal.ToString("C2"))
+                .Replace("{IVA}", iva.ToString("C2"))
+                .Replace("{DESCUENTO}", Convert.ToDecimal(factura["Descuento"]).ToString("C2"))
+                .Replace("{ANTICIPO}", Convert.ToDecimal(factura["Anticipo"]).ToString("C2"))
+                .Replace("{COSTO_FINAL}", totalFinal.ToString("C2"))
+                .Replace("{FECHA_ENTRADA}", Convert.ToDateTime(factura["FechaEntrada"]).ToString("dd/MM/yyyy"))
+                .Replace("{FECHA_SALIDA}", Convert.ToDateTime(factura["FechaSalida"]).ToString("dd/MM/yyyy"))
+                .Replace("{CHECKIN}", Convert.ToDateTime(factura["F_CheckIn"]).ToString("dd/MM/yyyy HH:mm"))
+                .Replace("{CHECKOUT}", Convert.ToDateTime(factura["F_CheckOut"]).ToString("dd/MM/yyyy HH:mm"))
+                .Replace("{NOMBRE_HOTEL}", factura["NombreHotel"]?.ToString() ?? "N/A")
+                .Replace("{DOMICILIO_HOTEL}", factura["Domicilio"]?.ToString() ?? "N/A")
+                .Replace("{TIPO_HABITACION}", factura["TipoHabitacion"]?.ToString() ?? "N/A")
+                .Replace("{NUM_HABITACIONES}", factura["NumeroHabitaciones"]?.ToString() ?? "0");
+
+
 
                 // Mostrar SaveFileDialog
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -504,7 +518,7 @@ namespace PIA_VILLA
 
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
                 {
-                    return; // Cancelado por el usuario
+                    return false; // Cancelado por el usuario
                 }
 
                 string pdfPath = saveFileDialog.FileName;
@@ -523,6 +537,7 @@ namespace PIA_VILLA
 
                     document.Close();
                 }
+                return true;
             }
             catch (Exception ex)
             {

@@ -261,14 +261,16 @@ namespace WindowsFormsApp1.PANTALLAS
 
                 string jsonServicios = "[" + string.Join(",", serviciosSeleccionados.Select(id => $"{{\"ID\":{id}}}")) + "]";
 
-                con.GenerateInvoicePDF(codRsv, jsonServicios, descuento);
-                MessageBox.Show("Factura generada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                bool exito = con.GenerateInvoicePDF(codRsv, jsonServicios, descuento);
+                if (exito)
+                {
+                    MessageBox.Show("Factura generada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al generar la factura: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
     }
 }
