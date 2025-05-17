@@ -123,27 +123,53 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void DG_RSV_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex < 0) return;
+            if (e.RowIndex < 0 || DG_RSV.Rows[e.RowIndex].Cells["Código_de_Reservación"].Value == null)
+            {
+                LB_FOLIO.Visible = false;
+                LB_COST.Visible = false;
+                return;
+            }
 
             string codRsv = DG_RSV.Rows[e.RowIndex].Cells["Código_de_Reservación"].Value.ToString();
 
-            var dao = new Reservaciones_DAO();
-            DataTable serviciosRsv = dao.sp_GetServiciosPorReservacion(codRsv);
+            // Obtener descuento
+            decimal descuento = 0;
+            decimal.TryParse(TB_DESC.Text.Trim(), out descuento);
 
-            for (int i = 0; i < CLB_SERV.Items.Count; i++)
-                CLB_SERV.SetItemChecked(i, false);
-
-            foreach (DataRow servicio in serviciosRsv.Rows)
+            // Obtener servicios seleccionados
+            var serviciosSeleccionados = new List<int>();
+            foreach (var item in CLB_SERV.CheckedItems)
             {
-                string nombreServicio = servicio["Nombre"].ToString();
-                for (int i = 0; i < CLB_SERV.Items.Count; i++)
+                foreach (DataGridViewRow row in DG_SERV.Rows)
                 {
-                    if (CLB_SERV.Items[i].ToString() == nombreServicio)
+                    if (row.Cells["Nombre"].Value.ToString() == item.ToString())
                     {
-                        CLB_SERV.SetItemChecked(i, true);
+                        serviciosSeleccionados.Add(Convert.ToInt32(row.Cells["IDServicio"].Value));
                         break;
                     }
                 }
+            }
+
+            string jsonServicios = "[" + string.Join(",", serviciosSeleccionados.Select(id => $"{{\"ID\":{id}}}")) + "]";
+
+            // Llamar al procedimiento para obtener el preview
+            var dao = new Reservaciones_DAO();
+            DataTable preview = dao.sp_GetFacturaPreviewConCostoFinal(codRsv, jsonServicios, descuento);
+
+            if (preview.Rows.Count > 0)
+            {
+                var row = preview.Rows[0];
+
+                LB_FOLIO.Text = row["Folio"].ToString();
+                LB_COST.Text = "$" + Convert.ToDecimal(row["CostoFinal"]).ToString("N2");
+
+                LB_FOLIO.Visible = true;
+                LB_COST.Visible = true;
+            }
+            else
+            {
+                LB_FOLIO.Visible = false;
+                LB_COST.Visible = false;
             }
         }
 

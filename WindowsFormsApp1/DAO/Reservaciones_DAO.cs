@@ -387,6 +387,34 @@ namespace PIA_VILLA
             return tabla;
         }
 
+        public DataTable sp_GetFacturaPreviewConCostoFinal(string codRsv, string serviciosAdicionales, decimal descuento)
+        {
+            DataTable resultado = new DataTable();
+
+            try
+            {
+                conectar();
+                SqlCommand cmd = new SqlCommand("sp_GetFacturaCostosFinales", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.Parameters.AddWithValue("@CodRsv", codRsv);
+                cmd.Parameters.AddWithValue("@ServiciosAdicionales", string.IsNullOrEmpty(serviciosAdicionales) ? (object)DBNull.Value : serviciosAdicionales);
+                cmd.Parameters.AddWithValue("@Descuento", descuento);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(resultado);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error al obtener la vista previa de la factura: " + ex.Message);
+            }
+            finally
+            {
+                desconectar();
+            }
+
+            return resultado;
+        }
 
     }
 }

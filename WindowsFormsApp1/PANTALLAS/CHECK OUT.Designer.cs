@@ -43,6 +43,7 @@
             this.LB_FOLIO = new System.Windows.Forms.Label();
             this.LB_COST = new System.Windows.Forms.Label();
             this.TB_DESC = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DG_RSV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DG_SERV)).BeginInit();
             this.SuspendLayout();
@@ -184,16 +185,27 @@
             // 
             // TB_DESC
             // 
-            this.TB_DESC.Location = new System.Drawing.Point(864, 491);
+            this.TB_DESC.Location = new System.Drawing.Point(864, 500);
             this.TB_DESC.Name = "TB_DESC";
             this.TB_DESC.Size = new System.Drawing.Size(181, 22);
             this.TB_DESC.TabIndex = 41;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(860, 477);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(83, 20);
+            this.label4.TabIndex = 42;
+            this.label4.Text = "Descuento:";
             // 
             // CHECK_OUT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1282, 728);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.TB_DESC);
             this.Controls.Add(this.LB_COST);
             this.Controls.Add(this.LB_FOLIO);
@@ -234,5 +246,6 @@
         private System.Windows.Forms.Label LB_FOLIO;
         private System.Windows.Forms.Label LB_COST;
         private System.Windows.Forms.TextBox TB_DESC;
+        private System.Windows.Forms.Label label4;
     }
 }
