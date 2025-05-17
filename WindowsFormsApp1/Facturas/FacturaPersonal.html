@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Factura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+                color: #2c3e50;
+            }
+
+            .header p {
+                margin: 5px 0;
+                font-size: 14px;
+            }
+
+        .invoice-details, .client-details {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+            .invoice-details span, .client-details span {
+                font-weight: bold;
+            }
+
+        .details-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .details-table th, .details-table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+                font-size: 14px;
+            }
+
+            .details-table th {
+                background-color: #2c3e50;
+                color: white;
+            }
+
+            .details-table .total-row {
+                font-weight: bold;
+                background-color: #ecf0f1;
+            }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Hotel Villa</h1>
+            <p>Av. Principal 123, Ciudad, Estado, CP 12345</p>
+            <p>RFC: HVI123456XYZ</p>
+            <p>Teléfono: (123) 456-7890</p>
+        </div>
+        <div class="invoice-details">
+            <p><span>Factura No:</span> {FOLIO}</p>
+            <p><span>Fecha:</span> {FECHA}</p>
+        </div>
+        <div class="client-details">
+            <p><span>Código de Reservación:</span> {COD_RSV}</p>
+        </div>
+        <table class="details-table">
+            <thead>
+                <tr>
+                    <th>Descripción</th>
+                    <th>Monto</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Hospedaje</td>
+                    <td>{COSTO_BRUTO}</td>
+                </tr>
+                {SERVICIOS_ROWS}
+                <tr>
+                    <td><strong>Subtotal</strong></td>
+                    <td><strong>{SUBTOTAL}</strong></td>
+                </tr>
+                <tr>
+                    <td>IVA (16%)</td>
+                    <td>{IVA}</td>
+                </tr>
+                <tr>
+                    <td>Descuento</td>
+                    <td>-{DESCUENTO}</td>
+                </tr>
+                <tr>
+                    <td>Anticipo</td>
+                    <td>-{ANTICIPO}</td>
+                </tr>
+                <tr class="total-row">
+                    <td><strong>Total</strong></td>
+                    <td><strong>{COSTO_FINAL}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="footer">
+            <p>Gracias por elegir Hotel Villa. ¡Esperamos verle de nuevo!</p>
+            <p>Factura generada electrónicamente</p>
+        </div>
+    </div>
+</body>
+</html>

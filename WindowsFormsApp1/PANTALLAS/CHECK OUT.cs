@@ -130,13 +130,37 @@ namespace WindowsFormsApp1.PANTALLAS
                 return;
             }
 
+            // Desmarcar todos los elementos del CheckedListBox al hacer clic en una nueva fila
+            for (int i = 0; i < CLB_SERV.Items.Count; i++)
+            {
+                CLB_SERV.SetItemChecked(i, false);
+            }
+
             string codRsv = DG_RSV.Rows[e.RowIndex].Cells["Código_de_Reservación"].Value.ToString();
 
-            // Obtener descuento
+            // Obtener descuento (esto ya lo tienes)
             decimal descuento = 0;
             decimal.TryParse(TB_DESC.Text.Trim(), out descuento);
 
-            // Obtener servicios seleccionados
+            var DAT = new Reservaciones_DAO();
+            DataTable serviciosRsv = DAT.sp_GetServiciosPorReservacion(codRsv);
+
+            for (int i = 0; i < CLB_SERV.Items.Count; i++)
+                CLB_SERV.SetItemChecked(i, false);
+            foreach (DataRow servicio in serviciosRsv.Rows)
+            {
+                string nombreServicio = servicio["Nombre"].ToString();
+                for (int i = 0; i < CLB_SERV.Items.Count; i++)
+                {
+                    if (CLB_SERV.Items[i].ToString() == nombreServicio)
+                    {
+                        CLB_SERV.SetItemChecked(i, true);
+                        break;
+                    }
+                }
+            }
+
+            // Obtener servicios seleccionados (adaptado)
             var serviciosSeleccionados = new List<int>();
             foreach (var item in CLB_SERV.CheckedItems)
             {
@@ -152,7 +176,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
             string jsonServicios = "[" + string.Join(",", serviciosSeleccionados.Select(id => $"{{\"ID\":{id}}}")) + "]";
 
-            // Llamar al procedimiento para obtener el preview
+            // Llamar al procedimiento para obtener el preview (esto también lo tienes)
             var dao = new Reservaciones_DAO();
             DataTable preview = dao.sp_GetFacturaPreviewConCostoFinal(codRsv, jsonServicios, descuento);
 
@@ -172,7 +196,6 @@ namespace WindowsFormsApp1.PANTALLAS
                 LB_COST.Visible = false;
             }
         }
-
         private void TB_COD_TextChanged(object sender, EventArgs e)
         {
             try
@@ -200,5 +223,11 @@ namespace WindowsFormsApp1.PANTALLAS
             }
         }
 
+        private void BTN_PDF_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+
+        }
     }
 }

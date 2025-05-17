@@ -132,6 +132,7 @@
             this.BTN_PDF.TabIndex = 36;
             this.BTN_PDF.Text = "GUARDAR PDF";
             this.BTN_PDF.UseVisualStyleBackColor = true;
+            this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // DG_SERV
             // 
