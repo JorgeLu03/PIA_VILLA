@@ -9,6 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using iTextSharp.tool.xml;
+using System.IO;
+
 namespace WindowsFormsApp1.PANTALLAS
 {
     public partial class CHECK_OUT : Form
@@ -225,8 +230,44 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_PDF_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            try
+            {
+                if (DG_RSV.CurrentRow == null)
+                {
+                    MessageBox.Show("Por favor, selecciona una reservación.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string codRsv = DG_RSV.CurrentRow.Cells["Código_de_Reservación"].Value.ToString();
+
+                decimal descuento;
+                if (!decimal.TryParse(TB_DESC.Text.Trim(), out descuento) || descuento < 0)
+                {
+                    descuento = 0;
+                }
+
+                var serviciosSeleccionados = new List<int>();
+                foreach (var item in CLB_SERV.CheckedItems)
+                {
+                    foreach (DataGridViewRow row in DG_SERV.Rows)
+                    {
+                        if (row.Cells["Nombre"].Value.ToString() == item.ToString())
+                        {
+                            serviciosSeleccionados.Add(Convert.ToInt32(row.Cells["IDServicio"].Value));
+                            break;
+                        }
+                    }
+                }
+
+                string jsonServicios = "[" + string.Join(",", serviciosSeleccionados.Select(id => $"{{\"ID\":{id}}}")) + "]";
+
+                con.GenerateInvoicePDF(codRsv, jsonServicios, descuento);
+                MessageBox.Show("Factura generada con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al generar la factura: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }

@@ -223,7 +223,9 @@
     <None Include="RECURSOS\perfil.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Facturas\FacturaPersonal.html" />
+    <Content Include="Facturas\FacturaPersonal.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

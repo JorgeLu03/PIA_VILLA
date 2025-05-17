@@ -1,96 +1,116 @@
 ﻿<!DOCTYPE html>
-<html lang="es">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Factura</title>
     <style>
+
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
+            font-size: 10pt;
             color: #333;
+            margin: 15px;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-
-        .header {
+        h1 {
             text-align: center;
-            border-bottom: 2px solid #000;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            font-size: 18pt;
+            color: #007bff;
+            margin-bottom: 10px;
         }
 
-            .header h1 {
-                margin: 0;
-                font-size: 24px;
-                color: #2c3e50;
-            }
-
-            .header p {
-                margin: 5px 0;
-                font-size: 14px;
-            }
-
-        .invoice-details, .client-details {
-            margin-bottom: 20px;
-            font-size: 14px;
+        p {
+            font-size: 9pt;
+            margin: 3px 0;
+            text-align: center;
         }
 
-            .invoice-details span, .client-details span {
-                font-weight: bold;
-            }
+        strong {
+            font-weight: bold;
+        }
 
+        /* Tabla principal de detalles */
         .details-table {
-            width: 100%;
+            width: 70%; /* Reducir el ancho para dejar espacio a la derecha */
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin-top: 10px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            float: left; /* Alinear a la izquierda */
         }
 
             .details-table th, .details-table td {
                 border: 1px solid #ddd;
-                padding: 8px;
+                padding: 6px;
                 text-align: left;
-                font-size: 14px;
+                font-size: 9pt;
             }
 
             .details-table th {
-                background-color: #2c3e50;
-                color: white;
+                background-color: #f8f9fa;
+                font-weight: bold;
+                color: #555;
+                font-size: 9pt;
             }
 
-            .details-table .total-row {
-                font-weight: bold;
-                background-color: #ecf0f1;
+        .services-header th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+            text-align: left;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+            font-size: 9pt;
+        }
+
+        /* Tabla de subtotales y ajustes */
+        .totals-table {
+            width: 28%; /* Ancho para la tabla de subtotales y ajustes */
+            border-collapse: collapse;
+            margin-top: 10px;
+            float: right; /* Alinear a la derecha */
+        }
+
+            .totals-table th, .totals-table td {
+                border: 1px solid #ddd;
+                padding: 6px;
+                text-align: right; /* Alinear el texto a la derecha */
+                font-size: 9pt;
             }
+
+            .totals-table th {
+                background-color: #f8f9fa;
+                font-weight: bold;
+                color: #555;
+                font-size: 9pt;
+            }
+
+        .total-row td {
+            font-weight: bold;
+            background-color: #e9ecef;
+            color: #333;
+        }
 
         .footer {
+            clear: both; /* Limpiar el float de las tablas */
+            margin-top: 15px;
             text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
+            font-size: 8pt;
             color: #777;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Hotel Villa</h1>
-            <p>Av. Principal 123, Ciudad, Estado, CP 12345</p>
-            <p>RFC: HVI123456XYZ</p>
-            <p>Teléfono: (123) 456-7890</p>
-        </div>
-        <div class="invoice-details">
-            <p><span>Factura No:</span> {FOLIO}</p>
-            <p><span>Fecha:</span> {FECHA}</p>
-        </div>
-        <div class="client-details">
-            <p><span>Código de Reservación:</span> {COD_RSV}</p>
-        </div>
+    <h1>Hotel Villa</h1>
+    <p>Av. Principal 123, Ciudad, Estado</p>
+    <p>RFC: HVI123456XYZ</p>
+    <p>Tel: (123) 456-7890</p>
+
+    <p style="text-align: left; margin-top: 15px;"><strong>Factura No:</strong> {FOLIO}</p>
+    <p style="text-align: left;"><strong>Fecha:</strong> {FECHA}</p>
+    <p style="text-align: left;"><strong>Código de Reservación:</strong> {COD_RSV}</p>
+
+    <div style="overflow: auto;">
         <table class="details-table">
             <thead>
                 <tr>
@@ -103,33 +123,43 @@
                     <td>Hospedaje</td>
                     <td>{COSTO_BRUTO}</td>
                 </tr>
-                {SERVICIOS_ROWS}
-                <tr>
-                    <td><strong>Subtotal</strong></td>
-                    <td><strong>{SUBTOTAL}</strong></td>
-                </tr>
                 <tr>
                     <td>IVA (16%)</td>
                     <td>{IVA}</td>
                 </tr>
+                <tr class="services-header">
+                    <th>Servicios Adicionales</th>
+                    <th>Monto</th>
+                </tr>
+                {SERVICIOS_ROWS}
+            </tbody>
+        </table>
+
+        <table class="totals-table">
+            <tbody>
                 <tr>
-                    <td>Descuento</td>
+                    <th>Subtotal</th>
+                    <td>{SUBTOTAL}</td>
+                </tr>
+                <tr>
+                    <th>Descuento</th>
                     <td>-{DESCUENTO}</td>
                 </tr>
                 <tr>
-                    <td>Anticipo</td>
+                    <th>Anticipo</th>
                     <td>-{ANTICIPO}</td>
                 </tr>
                 <tr class="total-row">
-                    <td><strong>Total</strong></td>
-                    <td><strong>{COSTO_FINAL}</strong></td>
+                    <th>Total</th>
+                    <td>{COSTO_FINAL}</td>
                 </tr>
             </tbody>
         </table>
-        <div class="footer">
-            <p>Gracias por elegir Hotel Villa. ¡Esperamos verle de nuevo!</p>
-            <p>Factura generada electrónicamente</p>
-        </div>
+    </div>
+
+    <div class="footer">
+        <p>Gracias por elegir Hotel Villa</p>
+        <p>Factura generada electrónicamente</p>
     </div>
 </body>
 </html>

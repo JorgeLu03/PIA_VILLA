@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using System.IO;
 
 
 namespace PIA_VILLA
@@ -416,5 +420,118 @@ namespace PIA_VILLA
             return resultado;
         }
 
+        public void GenerateInvoicePDF(string codRsv, string serviciosAdicionales, decimal descuento)
+        {
+            try
+            {
+                conectar();
+
+                // Obtener los datos de la factura
+                SqlCommand cmd = new SqlCommand("sp_GetFacturaCostosFinales", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@CodRsv", codRsv);
+                cmd.Parameters.AddWithValue("@ServiciosAdicionales", serviciosAdicionales ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Descuento", descuento);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dtFactura = new DataTable();
+                adapter.Fill(dtFactura);
+
+                if (dtFactura.Rows.Count == 0)
+                {
+                    throw new Exception("No se encontraron datos para generar la factura.");
+                }
+
+                DataRow factura = dtFactura.Rows[0];
+
+                // Obtener los servicios adicionales
+                SqlCommand cmdServicios = new SqlCommand("sp_GetServiciosPorReservacion", _conexion);
+                cmdServicios.CommandType = CommandType.StoredProcedure;
+                cmdServicios.Parameters.AddWithValue("@CodRsv", codRsv);
+                DataTable dtServicios = new DataTable();
+                adapter = new SqlDataAdapter(cmdServicios);
+                adapter.Fill(dtServicios);
+
+                // Calcular subtotal e IVA
+                decimal costoBruto = Convert.ToDecimal(factura["CostoBruto"]);
+                decimal totalServicios = 0;
+                foreach (DataRow servicio in dtServicios.Rows)
+                {
+                    if (servicio["PrecioBase"] != DBNull.Value)
+                    {
+                        totalServicios += Convert.ToDecimal(servicio["PrecioBase"]);
+                    }
+                }
+                decimal subtotal = costoBruto + totalServicios;
+                decimal iva = subtotal * 0.16m;
+
+                // Generar las filas HTML de servicios
+                string serviciosRows = "";
+                foreach (DataRow servicio in dtServicios.Rows)
+                {
+                    if (servicio["Nombre"] != DBNull.Value && servicio["PrecioBase"] != DBNull.Value)
+                    {
+                        serviciosRows += $"<tr><td>{servicio["Nombre"]}</td><td>{Convert.ToDecimal(servicio["PrecioBase"]).ToString("C2")}</td></tr>";
+                    }
+                }
+
+                // Cargar plantilla HTML
+                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Facturas", "FacturaPersonal.html");
+                if (!File.Exists(templatePath))
+                {
+                    throw new Exception("No se encontró la plantilla HTML en la ruta especificada.");
+                }
+                string htmlTemplate = File.ReadAllText(templatePath);
+
+                // Reemplazar marcadores
+                string htmlContent = htmlTemplate
+                    .Replace("{FOLIO}", factura["Folio"]?.ToString() ?? "N/A")
+                    .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy"))
+                    .Replace("{COD_RSV}", factura["Código_de_Reservación"]?.ToString() ?? "N/A")
+                    .Replace("{COSTO_BRUTO}", costoBruto.ToString("C2"))
+                    .Replace("{SERVICIOS_ROWS}", serviciosRows)
+                    .Replace("{SUBTOTAL}", subtotal.ToString("C2"))
+                    .Replace("{IVA}", iva.ToString("C2"))
+                    .Replace("{DESCUENTO}", Convert.ToDecimal(factura["Descuento"]).ToString("C2"))
+                    .Replace("{ANTICIPO}", Convert.ToDecimal(factura["Anticipo"]).ToString("C2"))
+                    .Replace("{COSTO_FINAL}", Convert.ToDecimal(factura["CostoFinal"]).ToString("C2"));
+
+                // Mostrar SaveFileDialog
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Title = "Guardar factura";
+                saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                saveFileDialog.FileName = $"Factura_{codRsv}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                {
+                    return; // Cancelado por el usuario
+                }
+
+                string pdfPath = saveFileDialog.FileName;
+
+                // Generar PDF
+                using (FileStream fs = new FileStream(pdfPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                {
+                    Document document = new Document(PageSize.A4, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                    document.Open();
+
+                    using (StringReader sr = new StringReader(htmlContent))
+                    {
+                        XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, sr);
+                    }
+
+                    document.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al generar la factura: {ex.Message}");
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
     }
 }
