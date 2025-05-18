@@ -53,7 +53,7 @@ namespace WindowsFormsApp1.PANTALLAS
         private void button5_Click(object sender, EventArgs e)
         {
             this.Hide();
-            REPORTES reporteWdw = new REPORTES();
+            REPORTE_OCUP reporteWdw = new REPORTE_OCUP();
             reporteWdw.ShowDialog();
         }
 

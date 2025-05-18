@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAO\Clientes_DAO.cs" />
+    <Compile Include="DAO\Facturas_DAO.cs" />
     <Compile Include="DAO\Hoteles_DAO.cs" />
     <Compile Include="DAO\Reservaciones_DAO.cs" />
     <Compile Include="DAO\TiposDeHabitacion_DAO.cs" />
@@ -114,11 +115,11 @@
     <Compile Include="PANTALLAS\HISTORIAL_CLIENTE.Designer.cs">
       <DependentUpon>HISTORIAL_CLIENTE.cs</DependentUpon>
     </Compile>
-    <Compile Include="PANTALLAS\REPORTES.cs">
+    <Compile Include="PANTALLAS\REPORTE_OCUP.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PANTALLAS\REPORTES.Designer.cs">
-      <DependentUpon>REPORTES.cs</DependentUpon>
+    <Compile Include="PANTALLAS\REPORTE_OCUP.Designer.cs">
+      <DependentUpon>REPORTE_OCUP.cs</DependentUpon>
     </Compile>
     <Compile Include="PANTALLAS\HOTEL_MGMT.cs">
       <SubType>Form</SubType>
@@ -174,8 +175,8 @@
     <EmbeddedResource Include="PANTALLAS\HISTORIAL_CLIENTE.resx">
       <DependentUpon>HISTORIAL_CLIENTE.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PANTALLAS\REPORTES.resx">
-      <DependentUpon>REPORTES.cs</DependentUpon>
+    <EmbeddedResource Include="PANTALLAS\REPORTE_OCUP.resx">
+      <DependentUpon>REPORTE_OCUP.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PANTALLAS\HOTEL_MGMT.resx">
       <DependentUpon>HOTEL_MGMT.cs</DependentUpon>
@@ -223,6 +224,9 @@
     <None Include="RECURSOS\perfil.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Facturas\ReporteOcupacion.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Facturas\FacturaPersonal.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

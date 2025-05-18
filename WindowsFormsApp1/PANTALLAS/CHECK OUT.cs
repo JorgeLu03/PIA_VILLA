@@ -18,12 +18,12 @@ namespace WindowsFormsApp1.PANTALLAS
 {
     public partial class CHECK_OUT : Form
     {
-        private Reservaciones_DAO con; // Declare 'con' as a private field  
+        private Reservaciones_DAO con;
 
         public CHECK_OUT()
         {
             InitializeComponent();
-            con = new Reservaciones_DAO(); // Initialize 'con' in the constructor  
+            con = new Reservaciones_DAO();
         }
 
         private void button4_Click(object sender, EventArgs e)
