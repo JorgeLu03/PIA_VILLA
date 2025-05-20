@@ -174,7 +174,7 @@ namespace PIA_VILLA
             }
         }
 
-        public void GenerateReporteOcupacionPDF(string pais, int año, string ciudad, string hotel)
+        public bool GenerateReporteOcupacionPDF(string pais, int año, string ciudad, string hotel)
         {
             try
             {
@@ -220,6 +220,7 @@ namespace PIA_VILLA
                     .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy"));
 
                 // Mostrar SaveFileDialog para que el usuario elija la ubicación y nombre del PDF
+                // Mostrar SaveFileDialog para que el usuario elija la ubicación y nombre del PDF
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
                     saveFileDialog.Title = "Guardar reporte de ocupación";
@@ -227,7 +228,7 @@ namespace PIA_VILLA
                     saveFileDialog.FileName = $"ReporteOcupacion_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
 
                     if (saveFileDialog.ShowDialog() != DialogResult.OK)
-                        return; // El usuario canceló
+                        return false; // El usuario canceló
 
                     string pdfPath = saveFileDialog.FileName;
 
@@ -245,6 +246,7 @@ namespace PIA_VILLA
                         document.Close();
                     }
                 }
+                return true;
             }
             catch (Exception ex)
             {
@@ -319,6 +321,250 @@ namespace PIA_VILLA
             finally
             {
                 desconectar();
+            }
+        }
+
+        public (DataTable Detalle, DataTable Resumen) GetReporteVentasHoteles(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                conectar();
+
+                SqlCommand cmd = new SqlCommand("sp_ReporteVentasHoteles", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Pais", (object)pais ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Año", año);
+                cmd.Parameters.AddWithValue("@Ciudad", (object)ciudad ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Hotel", (object)hotel ?? DBNull.Value);
+
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+
+                    if (ds.Tables.Count < 1) // Ajustamos la validación ya que el SP solo devuelve un resultado
+                    {
+                        throw new Exception("El procedimiento no devolvió el conjunto de resultados esperado.");
+                    }
+
+                    return (ds.Tables[0], new DataTable()); // Devolvemos el DataTable y un DataTable vacío para el "Resumen"
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el reporte de ventas: {ex.Message}");
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
+
+        public DataTable DG_VENTAS(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                var (detalle, _) = GetReporteVentasHoteles(pais, año, ciudad, hotel);
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Ciudad", typeof(string));
+                dt.Columns.Add("Hotel", typeof(string));
+                dt.Columns.Add("Año", typeof(int));
+                dt.Columns.Add("Mes", typeof(string));
+                dt.Columns.Add("Ingresos por Hospedaje", typeof(decimal));
+                dt.Columns.Add("Ingresos por Servicios", typeof(decimal));
+                dt.Columns.Add("Ingresos Totales", typeof(decimal));
+
+                foreach (DataRow row in detalle.Rows)
+                {
+                    dt.Rows.Add(
+                        row["Ciudad"],
+                        row["Hotel"],
+                        row["Año"],
+                        row["Mes"],
+                        Convert.ToDecimal(row["Ingresos_por_Hospedaje"]),
+                        Convert.ToDecimal(row["Ingresos_por_Servicios"]),
+                        Convert.ToDecimal(row["Ingresos_Totales"])
+                    );
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al preparar datos para DG_VENTAS1: {ex.Message}");
+            }
+        }
+
+        public DataTable DG_VENTAS2(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                conectar();
+                SqlCommand cmd = new SqlCommand("sp_ReporteVentasHoteles", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Pais", (object)pais ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Año", año);
+                cmd.Parameters.AddWithValue("@Ciudad", (object)ciudad ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Hotel", (object)hotel ?? DBNull.Value);
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                adapter.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener datos de ventas: {ex.Message}");
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
+
+
+
+
+
+
+
+        // Dentro de tu clase Facturas_DAO.cs
+
+        public DataTable GetDataForDG_VENTAS2(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                var (detalle, _) = GetReporteVentasHoteles2(pais, año, ciudad, hotel);
+
+                DataTable dt = new DataTable();
+                dt.Columns.Add("Ciudad", typeof(string));
+                dt.Columns.Add("Nombre del Hotel", typeof(string));
+                dt.Columns.Add("Año", typeof(int));
+                dt.Columns.Add("Mes", typeof(string));
+                dt.Columns.Add("Ingresos por Hospedaje", typeof(decimal));
+                dt.Columns.Add("Ingresos por Servicios", typeof(decimal));
+                dt.Columns.Add("Ingresos Totales", typeof(decimal));
+
+                foreach (DataRow row in detalle.Rows)
+                {
+                    dt.Rows.Add(
+                        row["Ciudad"],
+                        row["Hotel"],
+                        row["Año"],
+                        row["Mes"],
+                        Convert.ToDecimal(row["Ingresos_por_Hospedaje"]),
+                        Convert.ToDecimal(row["Ingresos_por_Servicios"]),
+                        Convert.ToDecimal(row["Ingresos_Totales"])
+                    );
+                }
+
+                return dt;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al preparar datos para DG_VENTAS1: {ex.Message}");
+            }
+        }
+
+        public (DataTable Detalle, DataTable Resumen) GetReporteVentasHoteles2(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                conectar();
+
+                SqlCommand cmd = new SqlCommand("sp_ReporteVentasHoteles", _conexion);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@Pais", (object)pais ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Año", año);
+                cmd.Parameters.AddWithValue("@Ciudad", (object)ciudad ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("@Hotel", (object)hotel ?? DBNull.Value);
+
+                using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                {
+                    DataSet ds = new DataSet();
+                    adapter.Fill(ds);
+
+                    if (ds.Tables.Count < 1)
+                    {
+                        throw new Exception("El procedimiento no devolvió el conjunto de resultados esperado.");
+                    }
+
+                    return (ds.Tables[0], new DataTable());
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al obtener el reporte de ventas: {ex.Message}");
+            }
+            finally
+            {
+                desconectar();
+            }
+        }
+
+        public bool GenerateReporteVentasPDF(string pais, int año, string ciudad, string hotel)
+        {
+            try
+            {
+                // Ajustar la llamada para desestructurar el resultado de GetReporteVentasHoteles2
+                var (detalle, _) = GetReporteVentasHoteles2(pais, año, ciudad, hotel);
+
+                string detalleRows = "";
+                foreach (DataRow row in detalle.Rows)
+                {
+                    detalleRows += $"<tr>" +
+                        $"<td>{row["Ciudad"]}</td>" +
+                        $"<td>{row["Hotel"]}</td>" +
+                        $"<td>{row["Año"]}</td>" +
+                        $"<td>{row["Mes"]}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Ingresos_por_Hospedaje"]).ToString("C2")}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Ingresos_por_Servicios"]).ToString("C2")}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Ingresos_Totales"]).ToString("C2")}</td>" +
+                        $"</tr>";
+                }
+
+                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Facturas", "ReporteVentas.html");
+                if (!File.Exists(templatePath))
+                {
+                    throw new Exception("No se encontró la plantilla HTML en la ruta especificada.");
+                }
+                string htmlTemplate = File.ReadAllText(templatePath);
+
+                string htmlContent = htmlTemplate
+                    .Replace("{DETALLE_ROWS}", detalleRows)
+                    .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy"));
+
+                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                {
+                    saveFileDialog.Title = "Guardar reporte de ventas";
+                    saveFileDialog.Filter = "Archivo PDF (*.pdf)|*.pdf";
+                    saveFileDialog.FileName = $"ReporteVentas_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                        return false; // Usuario canceló
+
+                    string pdfPath = saveFileDialog.FileName;
+
+                    using (FileStream fs = new FileStream(pdfPath, FileMode.Create, FileAccess.Write, FileShare.None))
+                    {
+                        Document document = new Document(PageSize.A4.Rotate(), 25, 25, 25, 25);
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                        document.Open();
+
+                        using (StringReader sr = new StringReader(htmlContent))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, sr);
+                        }
+
+                        document.Close();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al generar el PDF del reporte de ventas: {ex.Message}");
             }
         }
     }

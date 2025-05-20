@@ -49,6 +49,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.LB_TX = new System.Windows.Forms.Label();
+            this.labelIN = new System.Windows.Forms.Label();
+            this.BTN_HISTCLIEN = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BTN_USERMGMT
@@ -249,11 +253,11 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Montserrat Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(751, 170);
+            this.label8.Location = new System.Drawing.Point(743, 170);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(94, 24);
+            this.label8.Size = new System.Drawing.Size(108, 48);
             this.label8.TabIndex = 16;
-            this.label8.Text = "REPORTES";
+            this.label8.Text = "REPORTE \r\nOCUPACIÓN";
             this.label8.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label9
@@ -292,12 +296,64 @@
             this.label10.Visible = false;
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(931, 85);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 70);
+            this.button1.TabIndex = 19;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // LB_TX
+            // 
+            this.LB_TX.AutoSize = true;
+            this.LB_TX.Font = new System.Drawing.Font("Montserrat Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LB_TX.Location = new System.Drawing.Point(927, 170);
+            this.LB_TX.Name = "LB_TX";
+            this.LB_TX.Size = new System.Drawing.Size(85, 48);
+            this.LB_TX.TabIndex = 20;
+            this.LB_TX.Text = "REPORTE\r\nVENTAS";
+            this.LB_TX.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // labelIN
+            // 
+            this.labelIN.AutoSize = true;
+            this.labelIN.Font = new System.Drawing.Font("Montserrat Medium", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelIN.Location = new System.Drawing.Point(743, 359);
+            this.labelIN.Name = "labelIN";
+            this.labelIN.Size = new System.Drawing.Size(111, 48);
+            this.labelIN.TabIndex = 22;
+            this.labelIN.Text = "HISTORIAL\r\nDEL CLIENTE";
+            this.labelIN.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // BTN_HISTCLIEN
+            // 
+            this.BTN_HISTCLIEN.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("BTN_HISTCLIEN.BackgroundImage")));
+            this.BTN_HISTCLIEN.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BTN_HISTCLIEN.FlatAppearance.BorderSize = 0;
+            this.BTN_HISTCLIEN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BTN_HISTCLIEN.Location = new System.Drawing.Point(761, 277);
+            this.BTN_HISTCLIEN.Name = "BTN_HISTCLIEN";
+            this.BTN_HISTCLIEN.Size = new System.Drawing.Size(75, 70);
+            this.BTN_HISTCLIEN.TabIndex = 21;
+            this.BTN_HISTCLIEN.UseVisualStyleBackColor = true;
+            this.BTN_HISTCLIEN.Click += new System.EventHandler(this.BTN_HISTCLIEN_Click);
+            // 
             // PRINCIPAL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(916, 495);
+            this.ClientSize = new System.Drawing.Size(1106, 495);
+            this.Controls.Add(this.labelIN);
+            this.Controls.Add(this.BTN_HISTCLIEN);
+            this.Controls.Add(this.LB_TX);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.label9);
@@ -348,5 +404,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label LB_TX;
+        private System.Windows.Forms.Label labelIN;
+        private System.Windows.Forms.Button BTN_HISTCLIEN;
     }
 }

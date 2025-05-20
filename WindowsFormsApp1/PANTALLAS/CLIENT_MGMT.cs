@@ -75,7 +75,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
                 con.sp_GestionCliente(opcion, nombre, fechaNac, correo, edociv, rfc, tel, cel,ciudad,estado,pais);
 
-                MessageBox.Show("Cliente registrado exitosamente.");
+                MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 var TabClients = new DataTable();
                 TabClients = con.sp_GetClientes();
                 DG_CLIENTES.DataSource = TabClients;
@@ -83,7 +83,7 @@ namespace WindowsFormsApp1.PANTALLAS
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: " + ex.Message);
+                MessageBox.Show("Error al registrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -117,24 +117,26 @@ namespace WindowsFormsApp1.PANTALLAS
             {
                 if (DG_CLIENTES.SelectedRows.Count > 0)
                 {
-                    string rfc = (string)DG_CLIENTES.SelectedRows[0].Cells["RFC"].Value;
+                    var confirm = MessageBox.Show("¿Estás seguro de que deseas eliminar este usuario?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirm == DialogResult.Yes)
+                    {
+                        string rfc = (string)DG_CLIENTES.SelectedRows[0].Cells["RFC"].Value;
+                        con.sp_GestionCliente('E', "", DateTime.Now, "", "", rfc, "", "", "", "", "");
+                        MessageBox.Show("Usuario eliminado correctamente.", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    con.sp_GestionCliente('E', "", DateTime.Now, "", "", rfc, "", "", "", "", "");
-
-                    MessageBox.Show("Usuario eliminado correctamente.");
-
-                    var TabClients = new DataTable();
-                    TabClients = con.sp_GetClientes();
-                    DG_CLIENTES.DataSource = TabClients;
+                        var TabClients = new DataTable();
+                        TabClients = con.sp_GetClientes();
+                        DG_CLIENTES.DataSource = TabClients;
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Por favor selecciona un usuario para eliminar.");
+                    MessageBox.Show("Por favor selecciona un usuario para eliminar.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al eliminar: " + ex.Message);
+                MessageBox.Show("Error al eliminar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -165,14 +167,15 @@ namespace WindowsFormsApp1.PANTALLAS
                     return;
                 }
 
-                MessageBox.Show("Cliente modificado exitosamente.");
+                MessageBox.Show("Cliente modificado exitosamente.", "Modificación exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 var TabClients = new DataTable();
                 TabClients = con.sp_GetClientes();
                 DG_CLIENTES.DataSource = TabClients;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al modificar: " + ex.Message);
+                MessageBox.Show("Error al modificar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         }

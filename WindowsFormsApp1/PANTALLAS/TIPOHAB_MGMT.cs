@@ -27,22 +27,42 @@
                 principalWdw.ShowDialog();
             }
 
-            private void TIPOHAB_MGMT_Load(object sender, EventArgs e)
+        private void TIPOHAB_MGMT_Load(object sender, EventArgs e)
+        {
+            var CLBCHECK = new TiposDeHabitacion_DAO();
+            CLBCHECK.CargarCLBAmenidades(CLB_AMENIDADES);
+
+            CB_TIPOCAMAS.Items.Add("Individual");
+            CB_TIPOCAMAS.Items.Add("Doble");
+            CB_TIPOCAMAS.Items.Add("Queen");
+            CB_TIPOCAMAS.Items.Add("King");
+
+            CargarHotelesEnComboBox();
+            CB_HOTEL.Text = "";
+
+            TB_COSTO.Text = "$";
+            TB_COSTO.ForeColor = Color.Gray;
+
+            TB_COSTO.GotFocus += (s, ev) =>
             {
-                var CLBCHECK = new TiposDeHabitacion_DAO();
-                CLBCHECK.CargarCLBAmenidades(CLB_AMENIDADES);
+                if (TB_COSTO.Text == "$")
+                {
+                    TB_COSTO.Text = "";
+                    TB_COSTO.ForeColor = Color.Black;
+                }
+            };
 
-                CB_TIPOCAMAS.Items.Add("Individual");
-                CB_TIPOCAMAS.Items.Add("Doble");
-                CB_TIPOCAMAS.Items.Add("Queen");
-                CB_TIPOCAMAS.Items.Add("King");
+            TB_COSTO.LostFocus += (s, ev) =>
+            {
+                if (string.IsNullOrWhiteSpace(TB_COSTO.Text))
+                {
+                    TB_COSTO.Text = "$";
+                    TB_COSTO.ForeColor = Color.Gray;
+                }
+            };
+        }
 
-                CargarHotelesEnComboBox();
-                CB_HOTEL.Text = "";
-
-            }
-
-            private void CargarHotelesEnComboBox()
+        private void CargarHotelesEnComboBox()
             {
                 try
                 {
@@ -102,8 +122,9 @@
                         DataTable tiposHabitacion = tipoHabGrid.sp_GetTiposHabPorHotel(idHotelSeleccionado,1);
 
                         DG_TIPOHAB.DataSource = tiposHabitacion;
+                    FormatearColumnaCosto();
 
-                    }
+                }
                 }
                 DG_CAR.DataSource = null;
             }
@@ -319,9 +340,10 @@
                             var tipoHabGrid = new TiposDeHabitacion_DAO();
                             DataTable tiposHabitacion = tipoHabGrid.sp_GetTiposHabPorHotel(idHotelSeleccionado, 1);
                             DG_TIPOHAB.DataSource = tiposHabitacion;
+                        FormatearColumnaCosto();
 
-                            // Recargar características
-                            DataTable caracteristicas = tipoHabGrid.sp_GetTiposHabPorHotel(idHotelSeleccionado, 2);
+                        // Recargar características
+                        DataTable caracteristicas = tipoHabGrid.sp_GetTiposHabPorHotel(idHotelSeleccionado, 2);
                             DG_CAR.DataSource = caracteristicas;
                         }
                     }
@@ -393,6 +415,20 @@
             DG_CAR.DataSource = cars;
 
         }
+
+        private void FormatearColumnaCosto()
+        {
+            if (DG_TIPOHAB.Columns.Contains("Costo"))
+            {
+                DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Format = "C2";
+                DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            DG_TIPOHAB.Columns["IDHotel"].Visible = false;
+            DG_TIPOHAB.Columns["IDTipoHab"].Visible = false;
+
+
+        }
+
 
     }
 }

@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Historial de Clientes</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+            .header h1 {
+                margin: 0;
+                font-size: 24px;
+                color: #2c3e50;
+            }
+
+            .header p {
+                margin: 5px 0;
+                font-size: 14px;
+            }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+            .table th, .table td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+                font-size: 10px; /* Reducido para que quepan las columnas */
+            }
+
+            .table th {
+                background-color: #2c3e50;
+                color: white;
+            }
+
+        .moneda {
+            text-align: right;
+        }
+
+        /* Anchos específicos para columnas en orientación horizontal */
+        .table th:nth-child(1), .table td:nth-child(1) {
+            width: 10%;
+        }
+        /* Nombre del Cliente */
+        .table th:nth-child(2), .table td:nth-child(2) {
+            width: 6%;
+        }
+        /* Ciudad */
+        .table th:nth-child(3), .table td:nth-child(3) {
+            width: 6%;
+        }
+        /* Hotel */
+        .table th:nth-child(4), .table td:nth-child(4) {
+            width: 6%;
+        }
+        /* Tipo de Habitación */
+        .table th:nth-child(5), .table td:nth-child(5) {
+            width: 6%;
+        }
+        /* Número de Habitación */
+        .table th:nth-child(6), .table td:nth-child(6) {
+            width: 6%;
+        }
+        /* Número de Personas */
+        .table th:nth-child(7), .table td:nth-child(7) {
+            width: 6%;
+        }
+        /* Código de Reservación */
+        .table th:nth-child(8), .table td:nth-child(8) {
+            width: 7%;
+        }
+        /* Fecha de Reservación */
+        .table th:nth-child(9), .table td:nth-child(9) {
+            width: 7%;
+        }
+        /* Fecha de Check In */
+        .table th:nth-child(10), .table td:nth-child(10) {
+            width: 7%;
+        }
+        /* Fecha de Check Out */
+        .table th:nth-child(11), .table td:nth-child(11) {
+            width: 6%;
+        }
+        /* Estatus */
+        .table th:nth-child(12), .table td:nth-child(12) {
+            width: 6%;
+        }
+        /* Anticipo */
+        .table th:nth-child(13), .table td:nth-child(13) {
+            width: 6%;
+        }
+        /* Monto Hospedaje */
+        .table th:nth-child(14), .table td:nth-child(14) {
+            width: 6%;
+        }
+        /* Monto Servicios */
+        .table th:nth-child(15), .table td:nth-child(15) {
+            width: 6%;
+        }
+        /* Total Factura */
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Historial de Clientes</h1>
+            <p>Fecha: {FECHA}</p>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre del Cliente</th>
+                    <th>Ciudad</th>
+                    <th>Hotel</th>
+                    <th>Tipo de Habitación</th>
+                    <th>Número de Habitación</th>
+                    <th>Número de Personas</th>
+                    <th>Código de Reservación</th>
+                    <th>Fecha de Reservación</th>
+                    <th>Fecha de Check In</th>
+                    <th>Fecha de Check Out</th>
+                    <th>Estatus</th>
+                    <th class="moneda">Anticipo</th>
+                    <th class="moneda">Monto Hospedaje</th>
+                    <th class="moneda">Monto Servicios</th>
+                    <th class="moneda">Total Factura</th>
+                </tr>
+            </thead>
+            <tbody>
+                {DETALLE_ROWS}
+            </tbody>
+        </table>
+
+        <div class="footer">
+            <p>Reporte generado electrónicamente</p>
+        </div>
+    </div>
+</body>
+</html>

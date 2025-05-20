@@ -7,6 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using iTextSharp.tool.xml;
+using System.IO;
 
 
 namespace PIA_VILLA
@@ -138,7 +142,111 @@ namespace PIA_VILLA
         }
 
 
+        public DataTable GetHistorialClientes(string clienteRFC, int? año, bool todaHistoria)
+        {
+            DataTable tabla = new DataTable();
+            try
+            {
+                conectar();
+                using (var cmd = new SqlCommand("PIA_VILLA.dbo.sp_GetHistorialClientes", _conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ClienteRFC", (object)clienteRFC ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@Año", (object)año ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@TodaHistoria", todaHistoria);
+                    using (var da = new SqlDataAdapter(cmd))
+                        da.Fill(tabla);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error al obtener el historial: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                desconectar();
+            }
+            return tabla;
+        }
 
+        public bool GenerateHistorialPDF(string clienteRFC, int? año, bool todaHistoria)
+        {
+            try
+            {
+                DataTable dt = GetHistorialClientes(clienteRFC, año, todaHistoria);
+                if (dt.Rows.Count == 0)
+                {
+                    throw new Exception("No hay datos para generar el PDF.");
+                }
+
+                string detalleRows = "";
+                foreach (DataRow row in dt.Rows)
+                {
+                    string fechaCheckIn = row["Fecha de Check In"] != DBNull.Value
+                        ? Convert.ToDateTime(row["Fecha de Check In"]).ToString("dd/MM/yyyy")
+                        : "No disponible";
+                    string fechaCheckOut = row["Fecha de Check Out"] != DBNull.Value
+                        ? Convert.ToDateTime(row["Fecha de Check Out"]).ToString("dd/MM/yyyy")
+                        : "No disponible";
+
+                    detalleRows += $"<tr>" +
+                        $"<td>{row["Nombre del cliente"]}</td>" +
+                        $"<td>{row["Ciudad"]}</td>" +
+                        $"<td>{row["Hotel"]}</td>" +
+                        $"<td>{row["Tipo de habitación"]}</td>" +
+                        $"<td>{row["Número de habitación"]}</td>" +
+                        $"<td>{row["Número de personas hospedadas"]}</td>" +
+                        $"<td>{row["Código de reservación"]}</td>" +
+                        $"<td>{Convert.ToDateTime(row["Fecha de reservación"]).ToString("dd/MM/yyyy")}</td>" +
+                        $"<td>{fechaCheckIn}</td>" +
+                        $"<td>{fechaCheckOut}</td>" +
+                        $"<td>{row["Estatus de la reservación"]}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Anticipo"]).ToString("C2")}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Monto de hospedaje"]).ToString("C2")}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Monto de servicios adicionales"]).ToString("C2")}</td>" +
+                        $"<td>{Convert.ToDecimal(row["Total Factura"]).ToString("C2")}</td>" +
+                        $"</tr>";
+                }
+
+                string templatePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Facturas", "ReporteHistorial.html");
+                if (!File.Exists(templatePath))
+                {
+                    throw new Exception("No se encontró la plantilla HTML.");
+                }
+                string htmlTemplate = File.ReadAllText(templatePath);
+                string htmlContent = htmlTemplate
+                    .Replace("{DETALLE_ROWS}", detalleRows)
+                    .Replace("{FECHA}", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
+
+                using (SaveFileDialog saveDialog = new SaveFileDialog())
+                {
+                    saveDialog.Filter = "Archivos PDF (*.pdf)|*.pdf";
+                    saveDialog.Title = "Guardar historial de clientes como PDF";
+                    saveDialog.FileName = $"HistorialClientes_RFC_{clienteRFC}_{DateTime.Now:yyyyMMdd_HHmmss}.pdf";
+
+                    if (saveDialog.ShowDialog() != DialogResult.OK)
+                        return false; // Usuario canceló
+
+                    string pdfPath = saveDialog.FileName;
+                    using (FileStream fs = new FileStream(pdfPath, FileMode.Create))
+                    {
+                        Document document = new Document(PageSize.A4.Rotate(), 25, 25, 25, 25);
+                        PdfWriter writer = PdfWriter.GetInstance(document, fs);
+                        document.Open();
+                        using (StringReader sr = new StringReader(htmlContent))
+                        {
+                            XMLWorkerHelper.GetInstance().ParseXHtml(writer, document, sr);
+                        }
+                        document.Close();
+                    }
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error al generar el PDF: {ex.Message}");
+            }
+        }
 
 
 

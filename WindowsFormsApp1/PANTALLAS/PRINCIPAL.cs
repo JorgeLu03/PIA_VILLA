@@ -98,22 +98,40 @@ namespace WindowsFormsApp1.PANTALLAS
             {
                 label10.Text = "Bienvenido " + Environment.NewLine + SESIÓN.NombreUsuario;
                 label10.Visible = true;
+                LB_TX.Visible = false;
                 label1.Visible = false;
                 label2.Visible = false;
                 label3.Visible = false;
                 label7.Visible = false;
                 label8.Visible = false;
+                labelIN.Visible = false;
                 BTN_USERMGMT.Visible = false;
                 BTN_HOTELMGMT.Visible = false;
                 BTN_HABMGMT.Visible = false;
                 BTN_CAN.Visible = false;
                 BTN_REP.Visible = false;
+                button1.Visible = false;
+                BTN_HISTCLIEN.Visible = false;
             }
         }
 
         private void label10_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.Hide();
+            REPORTE_VENTAS checkinWdw = new REPORTE_VENTAS();
+            checkinWdw.ShowDialog();
+        }
+
+        private void BTN_HISTCLIEN_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            HISTORIAL_CLIENTE checkinWdw = new HISTORIAL_CLIENTE();
+            checkinWdw.ShowDialog();
         }
     }
 }

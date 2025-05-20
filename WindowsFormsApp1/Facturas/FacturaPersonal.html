@@ -1,127 +1,150 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
     <meta charset="UTF-8" />
     <title>Factura</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            font-size: 10pt;
+            font-size: 12px;
             color: #333;
-            margin: 15px;
+            margin: 0;
+            background-color: #f9f9f9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 25px;
+            border: 1px solid #ddd;
+            box-shadow: 0 0 5px rgba(0,0,0,0.05);
         }
 
         h1 {
             text-align: center;
-            font-size: 18pt;
-            color: #007bff;
-            margin-bottom: 10px;
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 5px;
         }
 
         p {
-            font-size: 9pt;
-            margin: 3px 0;
+            margin: 2px 0;
             text-align: center;
         }
 
-        strong {
-            font-weight: bold;
-        }
-
-        .details-table {
-            width: 70%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            float: left;
-        }
-
-            .details-table th, .details-table td {
-                border: 1px solid #ddd;
-                padding: 6px;
-                text-align: left;
-                font-size: 9pt;
-            }
-
-            .details-table th {
-                background-color: #f8f9fa;
-                font-weight: bold;
-                color: #555;
-            }
-
-        .services-header th {
-            background-color: #f0f0f0;
-            font-weight: bold;
+        .info p {
             text-align: left;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-        }
-
-        .totals-table {
-            width: 28%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            float: right;
-        }
-
-            .totals-table th, .totals-table td {
-                border: 1px solid #ddd;
-                padding: 6px;
-                text-align: right;
-                font-size: 9pt;
-            }
-
-            .totals-table th {
-                background-color: #f8f9fa;
-                font-weight: bold;
-                color: #555;
-            }
-
-        .total-row td {
-            font-weight: bold;
-            background-color: #e9ecef;
-            color: #333;
-        }
-
-        .footer {
-            clear: both;
-            margin-top: 15px;
-            text-align: center;
-            font-size: 8pt;
-            color: #777;
+            margin: 4px 0;
         }
 
         .section-title {
             font-weight: bold;
-            font-size: 10pt;
-            margin-top: 10px;
+            font-size: 14px;
+            margin-top: 20px;
+            border-bottom: 1px solid #2c3e50; /* Mantenemos el borde inferior como el subrayado */
+            padding-bottom: 4px;
+            color: #2c3e50; /* Color original del texto */
+            text-align: left; /* Aseguramos que el texto esté alineado a la izquierda */
+            /* --- CAMBIOS SOLICITADOS AQUÍ --- */
+            /* Cambia el color del texto a blanco */
+            color: white;
+            /* Añade un fondo para que el "subrayado" (borde inferior) parezca una barra */
+            background-color: #2c3e50;
+            /* Ajusta el padding para que la barra se vea bien */
+            padding: 4px 8px; /* Padding vertical y horizontal */
+            display: inline-block; /* Para que el fondo se ajuste al texto y no ocupe todo el ancho */
+            border-radius: 3px; /* Pequeñas esquinas redondeadas para un mejor look */
+            /* Elimina el border-bottom ya que el background-color ahora sirve como "subrayado" visual */
+            border-bottom: none;
+        }
+
+
+        .info-block {
+            margin: 4px 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            font-size: 12px;
             text-align: left;
         }
 
-        .info-block {
-            font-size: 9pt;
-            margin: 4px 0;
+        th {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        .services-header th {
+            background-color: #34495e;
+        }
+
+        .totals {
+            margin-top: 10px;
+            float: left;
+            width: 250px;
+        }
+
+            .totals th, .totals td {
+                padding: 8px;
+                font-size: 12px;
+            }
+
+            .totals th {
+                text-align: left;
+                width: 55%;
+                white-space: nowrap;
+            }
+
+            .totals td {
+                text-align: right;
+                width: 45%;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+        .total-row td {
+            font-weight: bold;
+            background-color: #ecf0f1;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 11px;
+            color: #777;
+            clear: both;
         }
     </style>
 </head>
 <body>
-    <h1>{NOMBRE_HOTEL}</h1>
+    <div class="container">
+        <h1>{NOMBRE_HOTEL}</h1>
+        <p>{DOMICILIO_HOTEL}</p>
 
-    <p>{DOMICILIO_HOTEL}</p>
+        <div class="info" style="margin-top: 20px;">
+            <p><strong>Folio de factura:</strong> {FOLIO}</p>
+            <p><strong>Fecha:</strong> {FECHA}</p>
+            <p><strong>Código de Reservación:</strong> {COD_RSV}</p>
+            <p><strong>Cliente:</strong> {CLIENTE}</p>
+            <p><strong>RFC:</strong> {RFC}</p>
+        </div>
 
-    <p style="text-align: left; margin-top: 15px;"><strong>Folio de factura:</strong> {FOLIO}</p>
-    <p style="text-align: left;"><strong>Fecha:</strong> {FECHA}</p>
-    <p style="text-align: left;"><strong>Código de Reservación:</strong> {COD_RSV}</p>
-    <p style="text-align: left;"><strong>Cliente:</strong> {CLIENTE}</p>
-    <p style="text-align: left;"><strong>RFC:</strong> {RFC}</p>
+        <div class="section-title">Detalles de la Estancia</div>
+        <div class="info-block"><strong>Fecha Entrada:</strong> {FECHA_ENTRADA}</div>
+        <div class="info-block"><strong>Fecha Salida:</strong> {FECHA_SALIDA}</div>
+        <div class="info-block"><strong>Check-In:</strong> {CHECKIN}</div>
+        <div class="info-block"><strong>Check-Out:</strong> {CHECKOUT}</div>
 
-    <p class="section-title">Detalles de la Estancia</p>
-    <div class="info-block"><strong>Fecha Entrada:</strong> {FECHA_ENTRADA}</div>
-    <div class="info-block"><strong>Fecha Salida:</strong> {FECHA_SALIDA}</div>
-    <div class="info-block"><strong>Check-In:</strong> {CHECKIN}</div>
-    <div class="info-block"><strong>Check-Out:</strong> {CHECKOUT}</div>
-
-    <div style="overflow: auto;">
-        <table class="details-table">
+        <table>
             <thead>
                 <tr>
                     <th>Descripción</th>
@@ -145,7 +168,7 @@
             </tbody>
         </table>
 
-        <table class="totals-table">
+        <table class="totals">
             <tbody>
                 <tr>
                     <th>Subtotal</th>
@@ -165,11 +188,11 @@
                 </tr>
             </tbody>
         </table>
-    </div>
 
-    <div class="footer">
-        <p>Gracias por elegir {NOMBRE_HOTEL}</p>
-        <p>Factura generada electrónicamente</p>
+        <div class="footer">
+            <p>Gracias por elegir {NOMBRE_HOTEL}</p>
+            <p>Factura generada electrónicamente</p>
+        </div>
     </div>
 </body>
 </html>

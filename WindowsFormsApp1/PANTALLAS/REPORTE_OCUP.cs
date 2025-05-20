@@ -20,7 +20,6 @@ namespace WindowsFormsApp1.PANTALLAS
     public partial class REPORTE_OCUP : Form
     {
         private Facturas_DAO dao;
-        private int numNomina;
 
         public REPORTE_OCUP()
         {
@@ -135,20 +134,21 @@ namespace WindowsFormsApp1.PANTALLAS
         {
             try
             {
-                // Obtén los filtros actuales
                 int año = (int)NUD_AÑO.Value;
-                string pais = CB_PAIS.SelectedValue?.ToString();
-                string ciudad = CB_CD.SelectedValue?.ToString();
-                string hotel = CB_HOTEL.SelectedValue?.ToString();
+                string pais = CB_PAIS.SelectedIndex != -1 ? CB_PAIS.SelectedValue?.ToString() : null;
+                string ciudad = CB_CD.SelectedIndex != -1 ? CB_CD.SelectedValue?.ToString() : null;
+                string hotel = CB_HOTEL.SelectedIndex != -1 && CB_HOTEL.SelectedValue?.ToString() != "Todos los hoteles" ? CB_HOTEL.SelectedValue?.ToString() : null;
 
-                // Llama al método del DAO para generar el PDF
-                dao.GenerateReporteOcupacionPDF(pais, año, ciudad, hotel);
-
-                MessageBox.Show("PDF generado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                bool exito = dao.GenerateReporteOcupacionPDF(pais, año, ciudad, hotel);
+                if (exito)
+                {
+                    MessageBox.Show("PDF generado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                // Si el usuario cancela, no se muestra ningún mensaje
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al generar el PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error al generar el PDF: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

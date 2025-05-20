@@ -133,6 +133,12 @@
     <Compile Include="PANTALLAS\PRINCIPAL.Designer.cs">
       <DependentUpon>PRINCIPAL.cs</DependentUpon>
     </Compile>
+    <Compile Include="PANTALLAS\REPORTE_VENTAS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PANTALLAS\REPORTE_VENTAS.Designer.cs">
+      <DependentUpon>REPORTE_VENTAS.cs</DependentUpon>
+    </Compile>
     <Compile Include="PANTALLAS\RESERVACIONES.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -187,6 +193,9 @@
     <EmbeddedResource Include="PANTALLAS\PRINCIPAL.resx">
       <DependentUpon>PRINCIPAL.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PANTALLAS\REPORTE_VENTAS.resx">
+      <DependentUpon>REPORTE_VENTAS.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PANTALLAS\RESERVACIONES.resx">
       <DependentUpon>RESERVACIONES.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,6 +233,12 @@
     <None Include="RECURSOS\perfil.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Facturas\ReporteHistorial.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Facturas\ReporteVentas.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Facturas\ReporteOcupacion.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
