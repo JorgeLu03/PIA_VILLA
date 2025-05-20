@@ -102,7 +102,7 @@
             // 
             // TB_PSW
             // 
-            this.TB_PSW.Location = new System.Drawing.Point(668, 210);
+            this.TB_PSW.Location = new System.Drawing.Point(921, 210);
             this.TB_PSW.Name = "TB_PSW";
             this.TB_PSW.Size = new System.Drawing.Size(233, 22);
             this.TB_PSW.TabIndex = 7;
@@ -111,7 +111,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(567, 212);
+            this.label4.Location = new System.Drawing.Point(820, 212);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 20);
             this.label4.TabIndex = 6;
@@ -119,7 +119,7 @@
             // 
             // TB_NUMNOMINA
             // 
-            this.TB_NUMNOMINA.Location = new System.Drawing.Point(723, 112);
+            this.TB_NUMNOMINA.Location = new System.Drawing.Point(976, 112);
             this.TB_NUMNOMINA.Name = "TB_NUMNOMINA";
             this.TB_NUMNOMINA.Size = new System.Drawing.Size(178, 22);
             this.TB_NUMNOMINA.TabIndex = 5;
@@ -128,7 +128,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(566, 114);
+            this.label5.Location = new System.Drawing.Point(819, 114);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(141, 20);
             this.label5.TabIndex = 8;
@@ -136,7 +136,7 @@
             // 
             // TB_TEL
             // 
-            this.TB_TEL.Location = new System.Drawing.Point(641, 160);
+            this.TB_TEL.Location = new System.Drawing.Point(894, 160);
             this.TB_TEL.Name = "TB_TEL";
             this.TB_TEL.Size = new System.Drawing.Size(260, 22);
             this.TB_TEL.TabIndex = 6;
@@ -146,7 +146,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(566, 162);
+            this.label6.Location = new System.Drawing.Point(819, 162);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(66, 20);
             this.label6.TabIndex = 10;
@@ -214,7 +214,7 @@
             // BTN_CLS
             // 
             this.BTN_CLS.Font = new System.Drawing.Font("Montserrat Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_CLS.Location = new System.Drawing.Point(552, 54);
+            this.BTN_CLS.Location = new System.Drawing.Point(684, 39);
             this.BTN_CLS.Name = "BTN_CLS";
             this.BTN_CLS.Size = new System.Drawing.Size(80, 37);
             this.BTN_CLS.TabIndex = 17;
@@ -252,7 +252,7 @@
             // 
             this.lb_blck.AutoSize = true;
             this.lb_blck.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_blck.Location = new System.Drawing.Point(1049, 71);
+            this.lb_blck.Location = new System.Drawing.Point(1217, 259);
             this.lb_blck.Name = "lb_blck";
             this.lb_blck.Size = new System.Drawing.Size(145, 20);
             this.lb_blck.TabIndex = 20;
@@ -262,17 +262,17 @@
             // 
             this.DG_BLCK.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_BLCK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DG_BLCK.Location = new System.Drawing.Point(981, 109);
+            this.DG_BLCK.Location = new System.Drawing.Point(1091, 311);
             this.DG_BLCK.Name = "DG_BLCK";
             this.DG_BLCK.RowHeadersWidth = 51;
             this.DG_BLCK.RowTemplate.Height = 24;
-            this.DG_BLCK.Size = new System.Drawing.Size(286, 128);
+            this.DG_BLCK.Size = new System.Drawing.Size(414, 212);
             this.DG_BLCK.TabIndex = 21;
             // 
             // BTN_DESBLOQUEAR
             // 
             this.BTN_DESBLOQUEAR.Font = new System.Drawing.Font("Montserrat Black", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BTN_DESBLOQUEAR.Location = new System.Drawing.Point(1056, 250);
+            this.BTN_DESBLOQUEAR.Location = new System.Drawing.Point(1231, 557);
             this.BTN_DESBLOQUEAR.Name = "BTN_DESBLOQUEAR";
             this.BTN_DESBLOQUEAR.Size = new System.Drawing.Size(149, 35);
             this.BTN_DESBLOQUEAR.TabIndex = 22;
@@ -284,7 +284,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1332, 652);
+            this.ClientSize = new System.Drawing.Size(1539, 719);
             this.Controls.Add(this.BTN_DESBLOQUEAR);
             this.Controls.Add(this.DG_BLCK);
             this.Controls.Add(this.lb_blck);

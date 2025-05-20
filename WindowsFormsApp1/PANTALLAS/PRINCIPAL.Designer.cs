@@ -129,7 +129,7 @@
             this.BTN_CHECKOUT.Location = new System.Drawing.Point(581, 277);
             this.BTN_CHECKOUT.Name = "BTN_CHECKOUT";
             this.BTN_CHECKOUT.Size = new System.Drawing.Size(75, 70);
-            this.BTN_CHECKOUT.TabIndex = 9;
+            this.BTN_CHECKOUT.TabIndex = 10;
             this.BTN_CHECKOUT.UseVisualStyleBackColor = true;
             this.BTN_CHECKOUT.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -142,7 +142,7 @@
             this.BTN_RSV.Location = new System.Drawing.Point(255, 277);
             this.BTN_RSV.Name = "BTN_RSV";
             this.BTN_RSV.Size = new System.Drawing.Size(75, 70);
-            this.BTN_RSV.TabIndex = 7;
+            this.BTN_RSV.TabIndex = 8;
             this.BTN_RSV.UseVisualStyleBackColor = true;
             this.BTN_RSV.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -155,7 +155,7 @@
             this.BTN_CHECKIN.Location = new System.Drawing.Point(412, 277);
             this.BTN_CHECKIN.Name = "BTN_CHECKIN";
             this.BTN_CHECKIN.Size = new System.Drawing.Size(75, 70);
-            this.BTN_CHECKIN.TabIndex = 8;
+            this.BTN_CHECKIN.TabIndex = 9;
             this.BTN_CHECKIN.UseVisualStyleBackColor = true;
             this.BTN_CHECKIN.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -168,7 +168,7 @@
             this.BTN_CLIENTMGMT.Location = new System.Drawing.Point(91, 277);
             this.BTN_CLIENTMGMT.Name = "BTN_CLIENTMGMT";
             this.BTN_CLIENTMGMT.Size = new System.Drawing.Size(75, 70);
-            this.BTN_CLIENTMGMT.TabIndex = 6;
+            this.BTN_CLIENTMGMT.TabIndex = 7;
             this.BTN_CLIENTMGMT.UseVisualStyleBackColor = true;
             this.BTN_CLIENTMGMT.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -280,7 +280,7 @@
             this.button10.Location = new System.Drawing.Point(25, 21);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(43, 35);
-            this.button10.TabIndex = 10;
+            this.button10.TabIndex = 12;
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -305,7 +305,7 @@
             this.button1.Location = new System.Drawing.Point(931, 85);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 70);
-            this.button1.TabIndex = 19;
+            this.button1.TabIndex = 6;
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
@@ -340,7 +340,7 @@
             this.BTN_HISTCLIEN.Location = new System.Drawing.Point(761, 277);
             this.BTN_HISTCLIEN.Name = "BTN_HISTCLIEN";
             this.BTN_HISTCLIEN.Size = new System.Drawing.Size(75, 70);
-            this.BTN_HISTCLIEN.TabIndex = 21;
+            this.BTN_HISTCLIEN.TabIndex = 11;
             this.BTN_HISTCLIEN.UseVisualStyleBackColor = true;
             this.BTN_HISTCLIEN.Click += new System.EventHandler(this.BTN_HISTCLIEN_Click);
             // 

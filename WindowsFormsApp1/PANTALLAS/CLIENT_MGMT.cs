@@ -44,6 +44,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_CLS_Click(object sender, EventArgs e)
         {
+
             TB_CORREO.Text = "";
             TB_NAME.Text = "";
             DTP_FECHANAC.Text = "";
@@ -58,6 +59,8 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_ADD_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos())
+                return;
             var con = new Clientes_DAO();
             try
             {
@@ -73,19 +76,28 @@ namespace WindowsFormsApp1.PANTALLAS
                 string estado = TB_ED.Text;
                 string pais = TB_PAIS.Text;
 
-                con.sp_GestionCliente(opcion, nombre, fechaNac, correo, edociv, rfc, tel, cel,ciudad,estado,pais);
+                con.sp_GestionCliente(opcion, nombre, fechaNac, correo, edociv, rfc, tel, cel, ciudad, estado, pais);
 
+                // Solo mostrar mensaje de éxito si no hubo excepción
                 MessageBox.Show("Cliente registrado exitosamente.", "Registro exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                var TabClients = new DataTable();
-                TabClients = con.sp_GetClientes();
-                DG_CLIENTES.DataSource = TabClients;
 
+                var TabClients = con.sp_GetClientes();
+                DG_CLIENTES.DataSource = TabClients;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al registrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Detectar error de clave duplicada
+                if (ex.Message.Contains("clave duplicada") || ex.Message.Contains("PRIMARY KEY"))
+                {
+                    MessageBox.Show("El RFC ya está registrado. Por favor, ingresa un RFC diferente.", "RFC duplicado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    MessageBox.Show("Error al registrar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
 
         private void DG_CLIENTES_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -112,6 +124,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_DEL_Click(object sender, EventArgs e)
         {
+
             var con = new Clientes_DAO();
             try
             {
@@ -140,8 +153,75 @@ namespace WindowsFormsApp1.PANTALLAS
             }
         }
 
+        private bool ValidarCampos()
+        {
+            // Nombre: solo letras y espacios
+            if (string.IsNullOrWhiteSpace(TB_NAME.Text) || TB_NAME.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("El nombre solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_NAME.Focus();
+                return false;
+            }
+
+            // Correo: debe contener una arroba
+            if (string.IsNullOrWhiteSpace(TB_CORREO.Text) || !TB_CORREO.Text.Contains("@"))
+            {
+                MessageBox.Show("El correo debe contener el carácter '@'.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_CORREO.Focus();
+                return false;
+            }
+
+            // Teléfono: solo números, puede estar vacío
+            if (!string.IsNullOrWhiteSpace(TB_TEL.Text) && TB_TEL.Text.Any(c => !char.IsDigit(c)))
+            {
+                MessageBox.Show("El teléfono solo debe contener números.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_TEL.Focus();
+                return false;
+            }
+
+            // Celular: solo números, puede estar vacío
+            if (!string.IsNullOrWhiteSpace(TB_CEL.Text) && TB_CEL.Text.Any(c => !char.IsDigit(c)))
+            {
+                MessageBox.Show("El celular solo debe contener números.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_CEL.Focus();
+                return false;
+            }
+
+            // Estado civil: debe ser uno de los valores precargados
+            if (!CB_EDOCIV.Items.Contains(CB_EDOCIV.Text))
+            {
+                MessageBox.Show("Selecciona un estado civil válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CB_EDOCIV.Focus();
+                return false;
+            }
+
+            // Ciudad, Estado, País: solo letras y espacios
+            if (!string.IsNullOrWhiteSpace(TB_CD.Text) && TB_CD.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("La ciudad solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_CD.Focus();
+                return false;
+            }
+            if (!string.IsNullOrWhiteSpace(TB_ED.Text) && TB_ED.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("El estado solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_ED.Focus();
+                return false;
+            }
+            if (!string.IsNullOrWhiteSpace(TB_PAIS.Text) && TB_PAIS.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("El país solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_PAIS.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void BTN_MOD_Click(object sender, EventArgs e)
         {
+            if (!ValidarCampos())
+                return;
             var con = new Clientes_DAO();
             try
             {

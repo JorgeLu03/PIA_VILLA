@@ -33,9 +33,44 @@ namespace WindowsFormsApp1.PANTALLAS
             principalWdw.ShowDialog();
         }
 
+        private void FormatearColumnasDinero()
+        {
+            string[] columnasDinero = { "Costo_Por_Noche", "Costo_de_Hospedaje", "IVA", "Total_Con_IVA", "Anticipo", "Descuento", "Pendiente" };
+            foreach (var col in columnasDinero)
+            {
+                if (DG_RSV.Columns.Contains(col))
+                {
+                    DG_RSV.Columns[col].DefaultCellStyle.Format = "C2";
+                    DG_RSV.Columns[col].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
+            }
+            
+
+        }
+
         private void CHECK_OUT_Load(object sender, EventArgs e)
         {
 
+            TB_DESC.Text = "$";
+            TB_DESC.ForeColor = Color.Gray;
+
+            TB_DESC.GotFocus += (s, ev) =>
+            {
+                if (TB_DESC.Text == "$")
+                {
+                    TB_DESC.Text = "";
+                    TB_DESC.ForeColor = Color.Black;
+                }
+            };
+
+            TB_DESC.LostFocus += (s, ev) =>
+            {
+                if (string.IsNullOrWhiteSpace(TB_DESC.Text))
+                {
+                    TB_DESC.Text = "$";
+                    TB_DESC.ForeColor = Color.Gray;
+                }
+            };
             LoadReservations();
 
             var TabServicios = con.sp_GetServiciosRsv();
@@ -57,6 +92,11 @@ namespace WindowsFormsApp1.PANTALLAS
                     break;
                 }
             }
+            if (DG_SERV.Columns.Contains("Costo_después_de_Impuestos"))
+            {
+                DG_SERV.Columns["Costo_después_de_Impuestos"].DefaultCellStyle.Format = "C2";
+                DG_SERV.Columns["Costo_después_de_Impuestos"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -70,6 +110,16 @@ namespace WindowsFormsApp1.PANTALLAS
                 if (DG_RSV.CurrentRow == null)
                 {
                     MessageBox.Show("Por favor, selecciona una reservación.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                // Validación de descuento
+                decimal descuento;
+                string descuentoTexto = TB_DESC.Text.Replace("$", "").Trim();
+                if (!decimal.TryParse(descuentoTexto, out descuento) || descuento < 0)
+                {
+                    MessageBox.Show("Por favor, ingresa un valor de descuento válido (número decimal positivo).", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TB_DESC.Focus();
                     return;
                 }
 
@@ -87,12 +137,6 @@ namespace WindowsFormsApp1.PANTALLAS
                 {
                     MessageBox.Show("La fecha y hora de check-out deben ser posteriores a la de check-in.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
-                }
-
-                decimal descuento;
-                if (!decimal.TryParse(TB_DESC.Text.Trim(), out descuento) || descuento < 0)
-                {
-                    descuento = 0;
                 }
 
                 var serviciosSeleccionados = new List<int>();
@@ -134,6 +178,19 @@ namespace WindowsFormsApp1.PANTALLAS
                 LB_COST.Visible = false;
                 return;
             }
+
+            // Asigna el descuento de la fila seleccionada a TB_DESC
+            if (DG_RSV.Columns.Contains("Descuento") && DG_RSV.Rows[e.RowIndex].Cells["Descuento"].Value != DBNull.Value)
+            {
+                TB_DESC.Text = DG_RSV.Rows[e.RowIndex].Cells["Descuento"].Value.ToString();
+                TB_DESC.ForeColor = Color.Black;
+            }
+            else
+            {
+                TB_DESC.Text = "$";
+                TB_DESC.ForeColor = Color.Gray;
+            }
+
 
             // Desmarcar todos los elementos del CheckedListBox al hacer clic en una nueva fila
             for (int i = 0; i < CLB_SERV.Items.Count; i++)
@@ -221,6 +278,9 @@ namespace WindowsFormsApp1.PANTALLAS
             {
                 DataTable dt = con.GetFacturaPreviewCodRsv(codRsv);
                 DG_RSV.DataSource = dt;
+                FormatearColumnasDinero();
+
+
             }
             catch (Exception ex)
             {
@@ -238,13 +298,17 @@ namespace WindowsFormsApp1.PANTALLAS
                     return;
                 }
 
-                string codRsv = DG_RSV.CurrentRow.Cells["Código_de_Reservación"].Value.ToString();
-
+                // Validación de descuento
                 decimal descuento;
-                if (!decimal.TryParse(TB_DESC.Text.Trim(), out descuento) || descuento < 0)
+                string descuentoTexto = TB_DESC.Text.Replace("$", "").Trim();
+                if (!decimal.TryParse(descuentoTexto, out descuento) || descuento < 0)
                 {
-                    descuento = 0;
+                    MessageBox.Show("Por favor, ingresa un valor de descuento válido (número decimal positivo).", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TB_DESC.Focus();
+                    return;
                 }
+
+                string codRsv = DG_RSV.CurrentRow.Cells["Código_de_Reservación"].Value.ToString();
 
                 var serviciosSeleccionados = new List<int>();
                 foreach (var item in CLB_SERV.CheckedItems)

@@ -70,6 +70,9 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_ADD_Click(object sender, EventArgs e)
         {
+            if (!ValidarCamposHotel())
+                return;
+
             var con = new Hoteles_DAO();
             try
             {
@@ -158,6 +161,9 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void BTN_MOD_Click(object sender, EventArgs e)
         {
+            if (!ValidarCamposHotel())
+                return;
+
             var con = new Hoteles_DAO();
             try
             {
@@ -285,6 +291,32 @@ namespace WindowsFormsApp1.PANTALLAS
                     BTN_CLS_Click(sender, EventArgs.Empty);
                 }
             }
+        }
+
+        private bool ValidarCamposHotel()
+        {
+            // Ciudad: solo letras y espacios
+            if (!string.IsNullOrWhiteSpace(TB_CD.Text) && TB_CD.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("La ciudad solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_CD.Focus();
+                return false;
+            }
+            // Estado: solo letras y espacios
+            if (!string.IsNullOrWhiteSpace(TB_ED.Text) && TB_ED.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("El estado solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_ED.Focus();
+                return false;
+            }
+            // País: solo letras y espacios
+            if (!string.IsNullOrWhiteSpace(TB_PAIS.Text) && TB_PAIS.Text.Any(c => !char.IsLetter(c) && !char.IsWhiteSpace(c)))
+            {
+                MessageBox.Show("El país solo debe contener letras y espacios.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_PAIS.Focus();
+                return false;
+            }
+            return true;
         }
 
     }

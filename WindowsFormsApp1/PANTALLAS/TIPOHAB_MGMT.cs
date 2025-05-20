@@ -62,6 +62,27 @@
             };
         }
 
+        private bool ValidarCamposTipoHab()
+        {
+            // Tipo de camas: debe ser uno de los valores del ComboBox
+            if (!CB_TIPOCAMAS.Items.Contains(CB_TIPOCAMAS.Text))
+            {
+                MessageBox.Show("Selecciona un tipo de cama válido.", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CB_TIPOCAMAS.Focus();
+                return false;
+            }
+
+            // Costo: debe ser un número decimal válido y mayor a cero
+            if (string.IsNullOrWhiteSpace(TB_COSTO.Text) || !decimal.TryParse(TB_COSTO.Text, out decimal costo) || costo <= 0)
+            {
+                MessageBox.Show("Introduce un costo válido (número decimal mayor a cero).", "Validación", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                TB_COSTO.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
         private void CargarHotelesEnComboBox()
             {
                 try
@@ -98,7 +119,9 @@
             }
             private void button5_Click(object sender, EventArgs e)
             {
-                TB_CAR.Text = "";
+            NUD_CANTHAB.Enabled = true;
+
+            TB_CAR.Text = "";
                 TB_COSTO.Text = "";
                 NUD_CANTHAB.Value = 0;
                 NUD_CAPACIDAD.Value = 0;
@@ -136,7 +159,8 @@
 
             private void DG_TIPOHAB_CellClick(object sender, DataGridViewCellEventArgs e)
             {
-                if (e.RowIndex >= 0)
+            NUD_CANTHAB.Enabled = false;    
+            if (e.RowIndex >= 0)
                 {
                     DataGridViewRow filaTH = DG_TIPOHAB.Rows[e.RowIndex];
                     DataGridViewRow fila = DG_TIPOHAB.Rows[e.RowIndex];
@@ -246,7 +270,10 @@
 
             private void BTN_ADD_Click(object sender, EventArgs e)
             {
-                if (CB_HOTEL.SelectedValue == null || !int.TryParse(CB_HOTEL.SelectedValue.ToString(), out int idHotel))
+            if (!ValidarCamposTipoHab())
+                return;
+
+            if (CB_HOTEL.SelectedValue == null || !int.TryParse(CB_HOTEL.SelectedValue.ToString(), out int idHotel))
                 {
                     MessageBox.Show("Por favor, selecciona un hotel.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
@@ -356,14 +383,19 @@
 
         private void BTN_MOD_Click(object sender, EventArgs e)
         {
-            if (DG_TIPOHAB.SelectedRows.Count == 0)
+            if (!ValidarCamposTipoHab())
+                return;
+
+            if (DG_TIPOHAB.CurrentCell == null)
             {
-                MessageBox.Show("Selecciona un tipo de habitación para modificar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Selecciona una celda del tipo de habitación a modificar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Obtener IDTipoHab seleccionado
-            int idTipoHab = Convert.ToInt32(DG_TIPOHAB.SelectedRows[0].Cells["IDTipoHab"].Value);
+            // Obtener la fila de la celda activa
+            DataGridViewRow fila = DG_TIPOHAB.Rows[DG_TIPOHAB.CurrentCell.RowIndex];
+            int idTipoHab = Convert.ToInt32(fila.Cells["IDTipoHab"].Value);
+
 
             // Validar hotel
             if (CB_HOTEL.SelectedValue == null || !int.TryParse(CB_HOTEL.SelectedValue.ToString(), out int idHotel))

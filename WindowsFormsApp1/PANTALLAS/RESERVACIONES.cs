@@ -54,6 +54,27 @@ namespace WindowsFormsApp1.PANTALLAS
             CB_CD.SelectedIndex = -1;
             CB_CD.SelectedIndexChanged += CB_CD_SelectedIndexChanged; // Reasocia el evento
 
+            TB_ANTICIPO.Text = "$";
+            TB_ANTICIPO.ForeColor = Color.Gray;
+
+            TB_ANTICIPO.GotFocus += (s, ev) =>
+            {
+                if (TB_ANTICIPO.Text == "$")
+                {
+                    TB_ANTICIPO.Text = "";
+                    TB_ANTICIPO.ForeColor = Color.Black;
+                }
+            };
+
+            TB_ANTICIPO.LostFocus += (s, ev) =>
+            {
+                if (string.IsNullOrWhiteSpace(TB_ANTICIPO.Text))
+                {
+                    TB_ANTICIPO.Text = "$";
+                    TB_ANTICIPO.ForeColor = Color.Gray;
+                }
+            };
+
 
         }
 
@@ -73,7 +94,7 @@ namespace WindowsFormsApp1.PANTALLAS
                     DG_TIPOHAB.DataSource = tiposHabitacion;
                     DG_TIPOHAB.Columns["IDTipoHab"].Visible = false;
                     DG_TIPOHAB.Columns["IDHotel"].Visible = false;
-
+                    FormatearColumnasMonedaDG_TIPOHAB();
                     DG_CAR.DataSource = null;
                 }
                 else
@@ -86,6 +107,17 @@ namespace WindowsFormsApp1.PANTALLAS
         private void DG_TIPOHAB_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void FormatearColumnasMonedaDG_TIPOHAB()
+        {
+            // Ajusta el nombre de la columna según tu DataTable
+            if (DG_TIPOHAB.Columns.Contains("Costo"))
+            {
+                DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Format = "C2";
+                DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            // Si tienes otras columnas monetarias, agrégalas aquí
         }
 
         private void DG_TIPOHAB_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -262,6 +294,20 @@ namespace WindowsFormsApp1.PANTALLAS
                 DateTime entrada = DTP_ENTRADA.Value;
                 DateTime salida = DTP_SALIDA.Value;
                 decimal anticipo = decimal.TryParse(TB_ANTICIPO.Text, out decimal result) ? result : 0;
+
+                // Calcular costo de hospedaje (sin IVA)
+                int precio = Convert.ToInt32(DG_TIPOHAB.CurrentRow.Cells["Costo"].Value);
+                int noches = (int)(salida.Date - entrada.Date).TotalDays;
+                if (noches <= 0) noches = 1;
+                decimal costoHospedaje = noches * cantHab * precio;
+
+                // Validación: el anticipo no puede ser mayor que el costo de hospedaje
+                if (anticipo > costoHospedaje)
+                {
+                    MessageBox.Show("El anticipo no puede ser mayor que el costo de hospedaje.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    TB_ANTICIPO.Focus();
+                    return;
+                }
 
                 // Este número deberías obtenerlo del login, por ejemplo:
                 int numNomina = SESIÓN.NumNómina; // ajusta según tu implementación

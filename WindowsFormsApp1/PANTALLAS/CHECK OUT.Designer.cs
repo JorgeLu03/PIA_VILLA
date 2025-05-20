@@ -54,7 +54,7 @@
             this.BTN_COUT.Location = new System.Drawing.Point(1093, 485);
             this.BTN_COUT.Name = "BTN_COUT";
             this.BTN_COUT.Size = new System.Drawing.Size(132, 37);
-            this.BTN_COUT.TabIndex = 27;
+            this.BTN_COUT.TabIndex = 4;
             this.BTN_COUT.Text = "CHECK OUT";
             this.BTN_COUT.UseVisualStyleBackColor = true;
             this.BTN_COUT.Click += new System.EventHandler(this.BTN_COUT_Click);
@@ -74,7 +74,7 @@
             this.TB_COD.Location = new System.Drawing.Point(534, 139);
             this.TB_COD.Name = "TB_COD";
             this.TB_COD.Size = new System.Drawing.Size(181, 22);
-            this.TB_COD.TabIndex = 25;
+            this.TB_COD.TabIndex = 1;
             this.TB_COD.TextChanged += new System.EventHandler(this.TB_COD_TextChanged);
             // 
             // button4
@@ -86,7 +86,7 @@
             this.button4.Location = new System.Drawing.Point(12, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 28;
+            this.button4.TabIndex = 6;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -99,7 +99,7 @@
             this.DG_RSV.RowHeadersWidth = 51;
             this.DG_RSV.RowTemplate.Height = 24;
             this.DG_RSV.Size = new System.Drawing.Size(1177, 247);
-            this.DG_RSV.TabIndex = 29;
+            this.DG_RSV.TabIndex = 7;
             this.DG_RSV.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_RSV_CellClick);
             this.DG_RSV.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_RSV_CellContentClick);
             // 
@@ -129,20 +129,21 @@
             this.BTN_PDF.Location = new System.Drawing.Point(1061, 133);
             this.BTN_PDF.Name = "BTN_PDF";
             this.BTN_PDF.Size = new System.Drawing.Size(164, 37);
-            this.BTN_PDF.TabIndex = 36;
+            this.BTN_PDF.TabIndex = 5;
             this.BTN_PDF.Text = "GUARDAR PDF";
             this.BTN_PDF.UseVisualStyleBackColor = true;
             this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
             // 
             // DG_SERV
             // 
+            this.DG_SERV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_SERV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_SERV.Location = new System.Drawing.Point(48, 506);
             this.DG_SERV.Name = "DG_SERV";
             this.DG_SERV.RowHeadersWidth = 51;
             this.DG_SERV.RowTemplate.Height = 24;
             this.DG_SERV.Size = new System.Drawing.Size(432, 189);
-            this.DG_SERV.TabIndex = 37;
+            this.DG_SERV.TabIndex = 8;
             // 
             // label3
             // 
@@ -160,7 +161,7 @@
             this.CLB_SERV.Location = new System.Drawing.Point(534, 546);
             this.CLB_SERV.Name = "CLB_SERV";
             this.CLB_SERV.Size = new System.Drawing.Size(162, 123);
-            this.CLB_SERV.TabIndex = 38;
+            this.CLB_SERV.TabIndex = 2;
             // 
             // LB_FOLIO
             // 
@@ -189,7 +190,7 @@
             this.TB_DESC.Location = new System.Drawing.Point(864, 500);
             this.TB_DESC.Name = "TB_DESC";
             this.TB_DESC.Size = new System.Drawing.Size(181, 22);
-            this.TB_DESC.TabIndex = 41;
+            this.TB_DESC.TabIndex = 3;
             // 
             // label4
             // 

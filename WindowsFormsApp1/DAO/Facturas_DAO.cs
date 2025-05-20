@@ -109,13 +109,13 @@ namespace PIA_VILLA
                 // Crear un nuevo DataTable con nombres de columnas personalizados
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Ciudad", typeof(string));
-                dt.Columns.Add("Nombre del Hotel", typeof(string));
+                dt.Columns.Add("Nombre_del_Hotel", typeof(string));
                 dt.Columns.Add("Año", typeof(int));
                 dt.Columns.Add("Mes", typeof(string));
-                dt.Columns.Add("Tipo de Habitación", typeof(string));
-                dt.Columns.Add("Cantidad de Habitaciones", typeof(int));
-                dt.Columns.Add("Porcentaje de Ocupación (%)", typeof(decimal));
-                dt.Columns.Add("Cantidad de Personas Hospedadas", typeof(int));
+                dt.Columns.Add("Tipo_de_Habitación", typeof(string));
+                dt.Columns.Add("Cantidad_de_Habitaciones", typeof(int));
+                dt.Columns.Add("Porcentaje_de_Ocupación_(%)", typeof(decimal));
+                dt.Columns.Add("Cantidad_de_Personas_Hospedadas", typeof(int));
 
                 // Llenar el DataTable con los datos
                 foreach (DataRow row in detalle.Rows)
@@ -149,10 +149,10 @@ namespace PIA_VILLA
                 // Crear un nuevo DataTable con nombres de columnas personalizados
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Ciudad", typeof(string));
-                dt.Columns.Add("Nombre del Hotel", typeof(string));
+                dt.Columns.Add("Nombre_del_Hotel", typeof(string));
                 dt.Columns.Add("Año", typeof(int));
                 dt.Columns.Add("Mes", typeof(string));
-                dt.Columns.Add("Porcentaje de Ocupación (%)", typeof(decimal));
+                dt.Columns.Add("Porcentaje_de_Ocupación_(%)", typeof(decimal));
 
                 // Llenar el DataTable con los datos
                 foreach (DataRow row in resumen.Rows)
@@ -439,12 +439,12 @@ namespace PIA_VILLA
 
                 DataTable dt = new DataTable();
                 dt.Columns.Add("Ciudad", typeof(string));
-                dt.Columns.Add("Nombre del Hotel", typeof(string));
+                dt.Columns.Add("Nombre_del_Hotel", typeof(string));
                 dt.Columns.Add("Año", typeof(int));
                 dt.Columns.Add("Mes", typeof(string));
-                dt.Columns.Add("Ingresos por Hospedaje", typeof(decimal));
-                dt.Columns.Add("Ingresos por Servicios", typeof(decimal));
-                dt.Columns.Add("Ingresos Totales", typeof(decimal));
+                dt.Columns.Add("Ingresos_por_Hospedaje", typeof(decimal));
+                dt.Columns.Add("Ingresos_por_Servicios", typeof(decimal));
+                dt.Columns.Add("Ingresos_Totales", typeof(decimal));
 
                 foreach (DataRow row in detalle.Rows)
                 {

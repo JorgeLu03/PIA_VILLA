@@ -61,7 +61,7 @@
             this.BTN_CLS.Location = new System.Drawing.Point(594, 24);
             this.BTN_CLS.Name = "BTN_CLS";
             this.BTN_CLS.Size = new System.Drawing.Size(80, 37);
-            this.BTN_CLS.TabIndex = 35;
+            this.BTN_CLS.TabIndex = 12;
             this.BTN_CLS.Text = "LIMPIAR";
             this.BTN_CLS.UseVisualStyleBackColor = true;
             this.BTN_CLS.Click += new System.EventHandler(this.BTN_CLS_Click);
@@ -75,7 +75,7 @@
             this.DG_HOTEL.RowHeadersWidth = 51;
             this.DG_HOTEL.RowTemplate.Height = 24;
             this.DG_HOTEL.Size = new System.Drawing.Size(1009, 212);
-            this.DG_HOTEL.TabIndex = 34;
+            this.DG_HOTEL.TabIndex = 14;
             this.DG_HOTEL.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_HOTEL_CellClick);
             this.DG_HOTEL.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_HOTEL_CellContentClick);
             this.DG_HOTEL.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DG_HOTEL_DataBindingComplete);
@@ -89,7 +89,7 @@
             this.button4.Location = new System.Drawing.Point(30, 26);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 33;
+            this.button4.TabIndex = 13;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -99,7 +99,7 @@
             this.BTN_DEL.Location = new System.Drawing.Point(983, 566);
             this.BTN_DEL.Name = "BTN_DEL";
             this.BTN_DEL.Size = new System.Drawing.Size(132, 37);
-            this.BTN_DEL.TabIndex = 31;
+            this.BTN_DEL.TabIndex = 11;
             this.BTN_DEL.Text = "ELIMINAR";
             this.BTN_DEL.UseVisualStyleBackColor = true;
             this.BTN_DEL.Click += new System.EventHandler(this.BTN_DEL_Click);
@@ -110,7 +110,7 @@
             this.BTN_MOD.Location = new System.Drawing.Point(562, 566);
             this.BTN_MOD.Name = "BTN_MOD";
             this.BTN_MOD.Size = new System.Drawing.Size(132, 37);
-            this.BTN_MOD.TabIndex = 30;
+            this.BTN_MOD.TabIndex = 10;
             this.BTN_MOD.Text = "MODIFICAR";
             this.BTN_MOD.UseVisualStyleBackColor = true;
             this.BTN_MOD.Click += new System.EventHandler(this.BTN_MOD_Click);
@@ -121,7 +121,7 @@
             this.BTN_ADD.Location = new System.Drawing.Point(106, 566);
             this.BTN_ADD.Name = "BTN_ADD";
             this.BTN_ADD.Size = new System.Drawing.Size(132, 37);
-            this.BTN_ADD.TabIndex = 28;
+            this.BTN_ADD.TabIndex = 9;
             this.BTN_ADD.Text = "AÑADIR";
             this.BTN_ADD.UseVisualStyleBackColor = true;
             this.BTN_ADD.Click += new System.EventHandler(this.BTN_ADD_Click);
@@ -131,7 +131,7 @@
             this.TB_DOM.Location = new System.Drawing.Point(183, 126);
             this.TB_DOM.Name = "TB_DOM";
             this.TB_DOM.Size = new System.Drawing.Size(170, 22);
-            this.TB_DOM.TabIndex = 25;
+            this.TB_DOM.TabIndex = 2;
             // 
             // label6
             // 
@@ -148,7 +148,7 @@
             this.TB_PAIS.Location = new System.Drawing.Point(880, 234);
             this.TB_PAIS.Name = "TB_PAIS";
             this.TB_PAIS.Size = new System.Drawing.Size(170, 22);
-            this.TB_PAIS.TabIndex = 24;
+            this.TB_PAIS.TabIndex = 7;
             // 
             // label4
             // 
@@ -165,14 +165,14 @@
             this.TB_ED.Location = new System.Drawing.Point(880, 182);
             this.TB_ED.Name = "TB_ED";
             this.TB_ED.Size = new System.Drawing.Size(170, 22);
-            this.TB_ED.TabIndex = 22;
+            this.TB_ED.TabIndex = 6;
             // 
             // TB_CD
             // 
             this.TB_CD.Location = new System.Drawing.Point(880, 130);
             this.TB_CD.Name = "TB_CD";
             this.TB_CD.Size = new System.Drawing.Size(170, 22);
-            this.TB_CD.TabIndex = 21;
+            this.TB_CD.TabIndex = 5;
             // 
             // label2
             // 
@@ -189,7 +189,7 @@
             this.TB_NAME.Location = new System.Drawing.Point(183, 86);
             this.TB_NAME.Name = "TB_NAME";
             this.TB_NAME.Size = new System.Drawing.Size(170, 22);
-            this.TB_NAME.TabIndex = 19;
+            this.TB_NAME.TabIndex = 1;
             // 
             // label1
             // 
@@ -247,14 +247,14 @@
             this.LB_SERV.Location = new System.Drawing.Point(515, 88);
             this.LB_SERV.Name = "LB_SERV";
             this.LB_SERV.Size = new System.Drawing.Size(220, 208);
-            this.LB_SERV.TabIndex = 43;
+            this.LB_SERV.TabIndex = 4;
             // 
             // NUD_PISOS
             // 
             this.NUD_PISOS.Location = new System.Drawing.Point(183, 169);
             this.NUD_PISOS.Name = "NUD_PISOS";
             this.NUD_PISOS.Size = new System.Drawing.Size(170, 22);
-            this.NUD_PISOS.TabIndex = 44;
+            this.NUD_PISOS.TabIndex = 3;
             // 
             // CB_ZONATUR
             // 
@@ -262,7 +262,7 @@
             this.CB_ZONATUR.Location = new System.Drawing.Point(909, 276);
             this.CB_ZONATUR.Name = "CB_ZONATUR";
             this.CB_ZONATUR.Size = new System.Drawing.Size(114, 20);
-            this.CB_ZONATUR.TabIndex = 45;
+            this.CB_ZONATUR.TabIndex = 8;
             this.CB_ZONATUR.Text = "Zona Turística";
             this.CB_ZONATUR.UseVisualStyleBackColor = true;
             // 

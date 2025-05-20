@@ -146,8 +146,7 @@ namespace PIA_VILLA
             }
             catch (SqlException ex)
             {
-                msg = "Error al ejecutar el procedimiento SP_GESTION_EMPLEADO:\n" + ex.Message;
-                MessageBox.Show(msg, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
             }
             finally
             {

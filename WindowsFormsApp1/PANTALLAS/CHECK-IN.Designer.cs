@@ -43,7 +43,7 @@
             this.BTN_CHECKIN.Location = new System.Drawing.Point(447, 486);
             this.BTN_CHECKIN.Name = "BTN_CHECKIN";
             this.BTN_CHECKIN.Size = new System.Drawing.Size(132, 37);
-            this.BTN_CHECKIN.TabIndex = 24;
+            this.BTN_CHECKIN.TabIndex = 2;
             this.BTN_CHECKIN.Text = "CHECK IN";
             this.BTN_CHECKIN.UseVisualStyleBackColor = true;
             this.BTN_CHECKIN.Click += new System.EventHandler(this.BTN_CHECKIN_Click);
@@ -63,7 +63,7 @@
             this.TB_COD.Location = new System.Drawing.Point(423, 93);
             this.TB_COD.Name = "TB_COD";
             this.TB_COD.Size = new System.Drawing.Size(181, 22);
-            this.TB_COD.TabIndex = 22;
+            this.TB_COD.TabIndex = 1;
             this.TB_COD.TextChanged += new System.EventHandler(this.TB_COD_TextChanged);
             // 
             // button4
@@ -75,19 +75,20 @@
             this.button4.Location = new System.Drawing.Point(12, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 25;
+            this.button4.TabIndex = 3;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // DG_RSV
             // 
+            this.DG_RSV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_RSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_RSV.Location = new System.Drawing.Point(96, 167);
             this.DG_RSV.Name = "DG_RSV";
             this.DG_RSV.RowHeadersWidth = 51;
             this.DG_RSV.RowTemplate.Height = 24;
             this.DG_RSV.Size = new System.Drawing.Size(834, 277);
-            this.DG_RSV.TabIndex = 26;
+            this.DG_RSV.TabIndex = 4;
             // 
             // CHECK_IN
             // 

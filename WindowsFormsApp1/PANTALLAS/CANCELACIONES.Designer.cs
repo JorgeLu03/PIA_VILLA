@@ -81,13 +81,14 @@
             // 
             // DG_RSV
             // 
+            this.DG_RSV.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.DG_RSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DG_RSV.Location = new System.Drawing.Point(119, 158);
             this.DG_RSV.Name = "DG_RSV";
             this.DG_RSV.RowHeadersWidth = 51;
             this.DG_RSV.RowTemplate.Height = 24;
             this.DG_RSV.Size = new System.Drawing.Size(890, 252);
-            this.DG_RSV.TabIndex = 14;
+            this.DG_RSV.TabIndex = 4;
             // 
             // CANCELACIONES
             // 

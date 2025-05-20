@@ -87,6 +87,7 @@ namespace WindowsFormsApp1.PANTALLAS
 
                 DG_OCUP1.DataSource = dtDetalle;
                 DG_OCUP2.DataSource = dtResumen;
+                FormatearColumnaPorcentajeDG_OCUP2();
             }
             catch (Exception ex)
             {
@@ -128,6 +129,15 @@ namespace WindowsFormsApp1.PANTALLAS
         {
             ActualizarGrids();
 
+        }
+
+        private void FormatearColumnaPorcentajeDG_OCUP2()
+        {
+            if (DG_OCUP2.Columns.Contains("Porcentaje_de_Ocupación_(%)"))
+            {
+                DG_OCUP2.Columns["Porcentaje_de_Ocupación_(%)"].DefaultCellStyle.Format = "N2";
+                DG_OCUP2.Columns["Porcentaje_de_Ocupación_(%)"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
         }
 
         private void BTN_PDF_Click(object sender, EventArgs e)

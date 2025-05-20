@@ -32,10 +32,28 @@ namespace WindowsFormsApp1.PANTALLAS
             {
                 DataTable dt = con.sp_GetRsv(codRsv);
                 DG_RSV.DataSource = dt;
+                if (DG_RSV.Columns.Count > 0)
+                {
+                    FormatearColumnasMoneda();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al cargar las reservaciones: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void FormatearColumnasMoneda()
+        {
+            // Ajusta los nombres de columna según los que realmente tienes en tu DataTable
+            if (DG_RSV.Columns.Contains("Anticipo"))
+            {
+                DG_RSV.Columns["Anticipo"].DefaultCellStyle.Format = "C2";
+                DG_RSV.Columns["Anticipo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            }
+            if (DG_RSV.Columns.Contains("Costo_Por_Habitación"))
+            {
+                DG_RSV.Columns["Costo_Por_Habitación"].DefaultCellStyle.Format = "C2";
+                DG_RSV.Columns["Costo_Por_Habitación"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
 

@@ -52,7 +52,7 @@
             this.BTN_PDF.Location = new System.Drawing.Point(788, 574);
             this.BTN_PDF.Name = "BTN_PDF";
             this.BTN_PDF.Size = new System.Drawing.Size(164, 37);
-            this.BTN_PDF.TabIndex = 41;
+            this.BTN_PDF.TabIndex = 5;
             this.BTN_PDF.Text = "GUARDAR PDF";
             this.BTN_PDF.UseVisualStyleBackColor = true;
             this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
@@ -65,7 +65,7 @@
             this.DG_VEN.RowHeadersWidth = 51;
             this.DG_VEN.RowTemplate.Height = 24;
             this.DG_VEN.Size = new System.Drawing.Size(851, 364);
-            this.DG_VEN.TabIndex = 40;
+            this.DG_VEN.TabIndex = 7;
             // 
             // GB_FILTRO
             // 
@@ -80,9 +80,9 @@
             this.GB_FILTRO.Location = new System.Drawing.Point(101, 44);
             this.GB_FILTRO.Name = "GB_FILTRO";
             this.GB_FILTRO.Size = new System.Drawing.Size(300, 138);
-            this.GB_FILTRO.TabIndex = 39;
+            this.GB_FILTRO.TabIndex = 0;
             this.GB_FILTRO.TabStop = false;
-            this.GB_FILTRO.Text = "groupBox1";
+            this.GB_FILTRO.Text = "FILTROS";
             // 
             // label4
             // 
@@ -99,7 +99,7 @@
             this.NUD_AÑO.Location = new System.Drawing.Point(159, 92);
             this.NUD_AÑO.Name = "NUD_AÑO";
             this.NUD_AÑO.Size = new System.Drawing.Size(120, 22);
-            this.NUD_AÑO.TabIndex = 31;
+            this.NUD_AÑO.TabIndex = 4;
             this.NUD_AÑO.ValueChanged += new System.EventHandler(this.NUD_AÑO_ValueChanged);
             // 
             // CB_HOTEL
@@ -108,7 +108,7 @@
             this.CB_HOTEL.Location = new System.Drawing.Point(159, 42);
             this.CB_HOTEL.Name = "CB_HOTEL";
             this.CB_HOTEL.Size = new System.Drawing.Size(121, 24);
-            this.CB_HOTEL.TabIndex = 30;
+            this.CB_HOTEL.TabIndex = 3;
             this.CB_HOTEL.SelectedIndexChanged += new System.EventHandler(this.CB_HOTEL_SelectedIndexChanged);
             // 
             // label3
@@ -127,7 +127,7 @@
             this.CB_CD.Location = new System.Drawing.Point(10, 92);
             this.CB_CD.Name = "CB_CD";
             this.CB_CD.Size = new System.Drawing.Size(121, 24);
-            this.CB_CD.TabIndex = 28;
+            this.CB_CD.TabIndex = 2;
             this.CB_CD.SelectedIndexChanged += new System.EventHandler(this.CB_CD_SelectedIndexChanged);
             // 
             // CB_PAIS
@@ -136,7 +136,7 @@
             this.CB_PAIS.Location = new System.Drawing.Point(10, 42);
             this.CB_PAIS.Name = "CB_PAIS";
             this.CB_PAIS.Size = new System.Drawing.Size(121, 24);
-            this.CB_PAIS.TabIndex = 27;
+            this.CB_PAIS.TabIndex = 1;
             this.CB_PAIS.SelectedIndexChanged += new System.EventHandler(this.CB_PAIS_SelectedIndexChanged);
             // 
             // label2
@@ -168,7 +168,7 @@
             this.button4.Location = new System.Drawing.Point(12, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 42;
+            this.button4.TabIndex = 6;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -176,7 +176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1055, 724);
+            this.ClientSize = new System.Drawing.Size(1055, 647);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.BTN_PDF);
             this.Controls.Add(this.DG_VEN);

@@ -38,6 +38,8 @@ namespace WindowsFormsApp1.PANTALLAS
             {
                 DataTable dt = con.sp_GetRsvCheckIn(codRsv);
                 DG_RSV.DataSource = dt;
+                FormatearColumnasDinero();
+
             }
             catch (Exception ex)
             {
@@ -55,6 +57,19 @@ namespace WindowsFormsApp1.PANTALLAS
             catch (Exception ex)
             {
                 MessageBox.Show($"Error al filtrar las reservaciones: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void FormatearColumnasDinero()
+        {
+            string[] columnasDinero = { "Anticipo", "Total", "Costo", "Precio", "Monto" };
+            foreach (var col in columnasDinero)
+            {
+                if (DG_RSV.Columns.Contains(col))
+                {
+                    DG_RSV.Columns[col].DefaultCellStyle.Format = "C2";
+                    DG_RSV.Columns[col].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                }
             }
         }
 

@@ -65,7 +65,7 @@
             this.BTN_CLS.Location = new System.Drawing.Point(642, 23);
             this.BTN_CLS.Name = "BTN_CLS";
             this.BTN_CLS.Size = new System.Drawing.Size(80, 37);
-            this.BTN_CLS.TabIndex = 35;
+            this.BTN_CLS.TabIndex = 14;
             this.BTN_CLS.Text = "LIMPIAR";
             this.BTN_CLS.UseVisualStyleBackColor = true;
             this.BTN_CLS.Click += new System.EventHandler(this.BTN_CLS_Click);
@@ -79,7 +79,7 @@
             this.DG_CLIENTES.RowHeadersWidth = 51;
             this.DG_CLIENTES.RowTemplate.Height = 24;
             this.DG_CLIENTES.Size = new System.Drawing.Size(1181, 272);
-            this.DG_CLIENTES.TabIndex = 34;
+            this.DG_CLIENTES.TabIndex = 16;
             this.DG_CLIENTES.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_CLIENTES_CellClick);
             this.DG_CLIENTES.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_CLIENTES_CellContentClick);
             // 
@@ -92,7 +92,7 @@
             this.button4.Location = new System.Drawing.Point(11, 25);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 33;
+            this.button4.TabIndex = 15;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -102,7 +102,7 @@
             this.BTN_DEL.Location = new System.Drawing.Point(1136, 577);
             this.BTN_DEL.Name = "BTN_DEL";
             this.BTN_DEL.Size = new System.Drawing.Size(132, 37);
-            this.BTN_DEL.TabIndex = 31;
+            this.BTN_DEL.TabIndex = 13;
             this.BTN_DEL.Text = "ELIMINAR";
             this.BTN_DEL.UseVisualStyleBackColor = true;
             this.BTN_DEL.Click += new System.EventHandler(this.BTN_DEL_Click);
@@ -113,7 +113,7 @@
             this.BTN_MOD.Location = new System.Drawing.Point(607, 577);
             this.BTN_MOD.Name = "BTN_MOD";
             this.BTN_MOD.Size = new System.Drawing.Size(132, 37);
-            this.BTN_MOD.TabIndex = 30;
+            this.BTN_MOD.TabIndex = 12;
             this.BTN_MOD.Text = "MODIFICAR";
             this.BTN_MOD.UseVisualStyleBackColor = true;
             this.BTN_MOD.Click += new System.EventHandler(this.BTN_MOD_Click);
@@ -124,7 +124,7 @@
             this.BTN_ADD.Location = new System.Drawing.Point(87, 577);
             this.BTN_ADD.Name = "BTN_ADD";
             this.BTN_ADD.Size = new System.Drawing.Size(132, 37);
-            this.BTN_ADD.TabIndex = 28;
+            this.BTN_ADD.TabIndex = 11;
             this.BTN_ADD.Text = "AÑADIR";
             this.BTN_ADD.UseVisualStyleBackColor = true;
             this.BTN_ADD.Click += new System.EventHandler(this.BTN_ADD_Click);
@@ -134,7 +134,7 @@
             this.TB_TEL.Location = new System.Drawing.Point(642, 147);
             this.TB_TEL.Name = "TB_TEL";
             this.TB_TEL.Size = new System.Drawing.Size(222, 22);
-            this.TB_TEL.TabIndex = 25;
+            this.TB_TEL.TabIndex = 6;
             // 
             // label6
             // 
@@ -151,7 +151,7 @@
             this.TB_RFC.Location = new System.Drawing.Point(624, 99);
             this.TB_RFC.Name = "TB_RFC";
             this.TB_RFC.Size = new System.Drawing.Size(240, 22);
-            this.TB_RFC.TabIndex = 24;
+            this.TB_RFC.TabIndex = 5;
             // 
             // label5
             // 
@@ -168,7 +168,7 @@
             this.TB_CORREO.Location = new System.Drawing.Point(148, 195);
             this.TB_CORREO.Name = "TB_CORREO";
             this.TB_CORREO.Size = new System.Drawing.Size(296, 22);
-            this.TB_CORREO.TabIndex = 22;
+            this.TB_CORREO.TabIndex = 3;
             // 
             // label3
             // 
@@ -195,7 +195,7 @@
             this.TB_NAME.Location = new System.Drawing.Point(164, 99);
             this.TB_NAME.Name = "TB_NAME";
             this.TB_NAME.Size = new System.Drawing.Size(280, 22);
-            this.TB_NAME.TabIndex = 19;
+            this.TB_NAME.TabIndex = 1;
             // 
             // label1
             // 
@@ -220,6 +220,7 @@
             // CB_EDOCIV
             // 
             this.CB_EDOCIV.FormattingEnabled = true;
+            this.CB_EDOCIV.ItemHeight = 16;
             this.CB_EDOCIV.Location = new System.Drawing.Point(173, 246);
             this.CB_EDOCIV.Name = "CB_EDOCIV";
             this.CB_EDOCIV.Size = new System.Drawing.Size(207, 24);
@@ -260,21 +261,21 @@
             this.TB_PAIS.Location = new System.Drawing.Point(1044, 193);
             this.TB_PAIS.Name = "TB_PAIS";
             this.TB_PAIS.Size = new System.Drawing.Size(224, 22);
-            this.TB_PAIS.TabIndex = 44;
+            this.TB_PAIS.TabIndex = 10;
             // 
             // TB_ED
             // 
             this.TB_ED.Location = new System.Drawing.Point(1044, 147);
             this.TB_ED.Name = "TB_ED";
             this.TB_ED.Size = new System.Drawing.Size(224, 22);
-            this.TB_ED.TabIndex = 43;
+            this.TB_ED.TabIndex = 9;
             // 
             // TB_CD
             // 
             this.TB_CD.Location = new System.Drawing.Point(1044, 101);
             this.TB_CD.Name = "TB_CD";
             this.TB_CD.Size = new System.Drawing.Size(224, 22);
-            this.TB_CD.TabIndex = 42;
+            this.TB_CD.TabIndex = 8;
             // 
             // label10
             // 
@@ -293,14 +294,14 @@
             this.DTP_FECHANAC.Location = new System.Drawing.Point(246, 147);
             this.DTP_FECHANAC.Name = "DTP_FECHANAC";
             this.DTP_FECHANAC.Size = new System.Drawing.Size(198, 22);
-            this.DTP_FECHANAC.TabIndex = 48;
+            this.DTP_FECHANAC.TabIndex = 2;
             // 
             // TB_CEL
             // 
             this.TB_CEL.Location = new System.Drawing.Point(642, 197);
             this.TB_CEL.Name = "TB_CEL";
             this.TB_CEL.Size = new System.Drawing.Size(222, 22);
-            this.TB_CEL.TabIndex = 49;
+            this.TB_CEL.TabIndex = 7;
             // 
             // label11
             // 

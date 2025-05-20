@@ -33,13 +33,13 @@
             this.DG_HIST = new System.Windows.Forms.DataGridView();
             this.button4 = new System.Windows.Forms.Button();
             this.GB_FILTRO = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.NUD_AÑO = new System.Windows.Forms.NumericUpDown();
+            this.TB_BUSQ = new System.Windows.Forms.TextBox();
             this.CB_FILTRO = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.NUD_AÑO = new System.Windows.Forms.NumericUpDown();
             this.BTN_PDF = new System.Windows.Forms.Button();
             this.CHK_EVER = new System.Windows.Forms.CheckBox();
-            this.TB_BUSQ = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DG_CLIENT)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DG_HIST)).BeginInit();
             this.GB_FILTRO.SuspendLayout();
@@ -54,7 +54,7 @@
             this.DG_CLIENT.RowHeadersWidth = 51;
             this.DG_CLIENT.RowTemplate.Height = 24;
             this.DG_CLIENT.Size = new System.Drawing.Size(1046, 245);
-            this.DG_CLIENT.TabIndex = 26;
+            this.DG_CLIENT.TabIndex = 8;
             this.DG_CLIENT.SelectionChanged += new System.EventHandler(this.DG_CLIENT_SelectionChanged);
             // 
             // DG_HIST
@@ -65,7 +65,7 @@
             this.DG_HIST.RowHeadersWidth = 51;
             this.DG_HIST.RowTemplate.Height = 24;
             this.DG_HIST.Size = new System.Drawing.Size(1046, 237);
-            this.DG_HIST.TabIndex = 29;
+            this.DG_HIST.TabIndex = 9;
             // 
             // button4
             // 
@@ -76,7 +76,7 @@
             this.button4.Location = new System.Drawing.Point(12, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 30;
+            this.button4.TabIndex = 7;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -88,9 +88,36 @@
             this.GB_FILTRO.Location = new System.Drawing.Point(115, 52);
             this.GB_FILTRO.Name = "GB_FILTRO";
             this.GB_FILTRO.Size = new System.Drawing.Size(300, 82);
-            this.GB_FILTRO.TabIndex = 40;
+            this.GB_FILTRO.TabIndex = 1;
             this.GB_FILTRO.TabStop = false;
-            this.GB_FILTRO.Text = "groupBox1";
+            this.GB_FILTRO.Text = "FILTROS";
+            // 
+            // TB_BUSQ
+            // 
+            this.TB_BUSQ.Location = new System.Drawing.Point(10, 48);
+            this.TB_BUSQ.Name = "TB_BUSQ";
+            this.TB_BUSQ.Size = new System.Drawing.Size(203, 22);
+            this.TB_BUSQ.TabIndex = 3;
+            this.TB_BUSQ.TextChanged += new System.EventHandler(this.TB_BUSQ_TextChanged);
+            // 
+            // CB_FILTRO
+            // 
+            this.CB_FILTRO.FormattingEnabled = true;
+            this.CB_FILTRO.Location = new System.Drawing.Point(92, 18);
+            this.CB_FILTRO.Name = "CB_FILTRO";
+            this.CB_FILTRO.Size = new System.Drawing.Size(121, 24);
+            this.CB_FILTRO.TabIndex = 2;
+            this.CB_FILTRO.SelectedIndexChanged += new System.EventHandler(this.CB_FILTRO_SelectedIndexChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(6, 18);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 20);
+            this.label6.TabIndex = 24;
+            this.label6.Text = "Búsqueda:";
             // 
             // label4
             // 
@@ -107,27 +134,8 @@
             this.NUD_AÑO.Location = new System.Drawing.Point(115, 425);
             this.NUD_AÑO.Name = "NUD_AÑO";
             this.NUD_AÑO.Size = new System.Drawing.Size(120, 22);
-            this.NUD_AÑO.TabIndex = 31;
+            this.NUD_AÑO.TabIndex = 4;
             this.NUD_AÑO.ValueChanged += new System.EventHandler(this.NUD_AÑO_ValueChanged);
-            // 
-            // CB_FILTRO
-            // 
-            this.CB_FILTRO.FormattingEnabled = true;
-            this.CB_FILTRO.Location = new System.Drawing.Point(92, 18);
-            this.CB_FILTRO.Name = "CB_FILTRO";
-            this.CB_FILTRO.Size = new System.Drawing.Size(121, 24);
-            this.CB_FILTRO.TabIndex = 27;
-            this.CB_FILTRO.SelectedIndexChanged += new System.EventHandler(this.CB_FILTRO_SelectedIndexChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Montserrat", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(6, 18);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 20);
-            this.label6.TabIndex = 24;
-            this.label6.Text = "Búsqueda:";
             // 
             // BTN_PDF
             // 
@@ -135,7 +143,7 @@
             this.BTN_PDF.Location = new System.Drawing.Point(997, 726);
             this.BTN_PDF.Name = "BTN_PDF";
             this.BTN_PDF.Size = new System.Drawing.Size(164, 37);
-            this.BTN_PDF.TabIndex = 42;
+            this.BTN_PDF.TabIndex = 6;
             this.BTN_PDF.Text = "GUARDAR PDF";
             this.BTN_PDF.UseVisualStyleBackColor = true;
             this.BTN_PDF.Click += new System.EventHandler(this.BTN_PDF_Click);
@@ -146,18 +154,10 @@
             this.CHK_EVER.Location = new System.Drawing.Point(294, 425);
             this.CHK_EVER.Name = "CHK_EVER";
             this.CHK_EVER.Size = new System.Drawing.Size(122, 20);
-            this.CHK_EVER.TabIndex = 43;
+            this.CHK_EVER.TabIndex = 5;
             this.CHK_EVER.Text = "Toda la historia";
             this.CHK_EVER.UseVisualStyleBackColor = true;
             this.CHK_EVER.CheckedChanged += new System.EventHandler(this.CHK_EVER_CheckedChanged);
-            // 
-            // TB_BUSQ
-            // 
-            this.TB_BUSQ.Location = new System.Drawing.Point(10, 48);
-            this.TB_BUSQ.Name = "TB_BUSQ";
-            this.TB_BUSQ.Size = new System.Drawing.Size(203, 22);
-            this.TB_BUSQ.TabIndex = 68;
-            this.TB_BUSQ.TextChanged += new System.EventHandler(this.TB_BUSQ_TextChanged);
             // 
             // HISTORIAL_CLIENTE
             // 

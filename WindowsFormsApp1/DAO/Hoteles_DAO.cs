@@ -104,7 +104,7 @@ namespace PIA_VILLA
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                throw new Exception("Error al registrar reservación: " + ex.Message);
             }
             finally
             {

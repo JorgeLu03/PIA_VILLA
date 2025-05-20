@@ -64,19 +64,7 @@ namespace PIA_VILLA
             return tablaResultado;
         }
 
-        public void sp_GestionCliente(
-          char opcion,
-          string nombre,
-          DateTime fechaNac,
-          string correo,
-          string edoCivil,
-          string rfc,
-          string tel,
-          string cel,
-          string ciudad,
-          string estado,
-          string pais
-      )
+        public void sp_GestionCliente(char opcion,string nombre,DateTime fechaNac,string correo,string edoCivil,string rfc,string tel,string cel,string ciudad,string estado,string pais)
         {
             string msg = "";
             try
@@ -105,8 +93,8 @@ namespace PIA_VILLA
             }
             catch (SqlException ex)
             {
-                msg = "Error al ejecutar el procedimiento SP_GESTION_CLIENTE:\n" + ex.Message;
-                MessageBox.Show(msg, "Error SQL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw;
+
             }
             finally
             {
@@ -194,7 +182,7 @@ namespace PIA_VILLA
                         $"<td>{row["Ciudad"]}</td>" +
                         $"<td>{row["Hotel"]}</td>" +
                         $"<td>{row["Tipo de habitación"]}</td>" +
-                        $"<td>{row["Número de habitación"]}</td>" +
+                        $"<td>{row["Habitaciones Asignadas"]}</td>" +
                         $"<td>{row["Número de personas hospedadas"]}</td>" +
                         $"<td>{row["Código de reservación"]}</td>" +
                         $"<td>{Convert.ToDateTime(row["Fecha de reservación"]).ToString("dd/MM/yyyy")}</td>" +

@@ -159,20 +159,20 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void FormatearColumnasMoneda()
         {
-            if (DG_VEN.Columns.Contains("Ingresos por Hospedaje"))
+            if (DG_VEN.Columns.Contains("Ingresos_por_Hospedaje"))
             {
-                DG_VEN.Columns["Ingresos por Hospedaje"].DefaultCellStyle.Format = "C2";
-                DG_VEN.Columns["Ingresos por Hospedaje"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                DG_VEN.Columns["Ingresos_por_Hospedaje"].DefaultCellStyle.Format = "C2";
+                DG_VEN.Columns["Ingresos_por_Hospedaje"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            if (DG_VEN.Columns.Contains("Ingresos por Servicios"))
+            if (DG_VEN.Columns.Contains("Ingresos_por_Servicios"))
             {
-                DG_VEN.Columns["Ingresos por Servicios"].DefaultCellStyle.Format = "C2";
-                DG_VEN.Columns["Ingresos por Servicios"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                DG_VEN.Columns["Ingresos_por_Servicios"].DefaultCellStyle.Format = "C2";
+                DG_VEN.Columns["Ingresos_por_Servicios"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            if (DG_VEN.Columns.Contains("Ingresos Totales"))
+            if (DG_VEN.Columns.Contains("Ingresos_Totales"))
             {
-                DG_VEN.Columns["Ingresos Totales"].DefaultCellStyle.Format = "C2";
-                DG_VEN.Columns["Ingresos Totales"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                DG_VEN.Columns["Ingresos_Totales"].DefaultCellStyle.Format = "C2";
+                DG_VEN.Columns["Ingresos_Totales"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
         }
 

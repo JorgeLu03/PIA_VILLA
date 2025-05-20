@@ -86,7 +86,7 @@
             this.TB_BUSQ.Location = new System.Drawing.Point(497, 59);
             this.TB_BUSQ.Name = "TB_BUSQ";
             this.TB_BUSQ.Size = new System.Drawing.Size(181, 22);
-            this.TB_BUSQ.TabIndex = 0;
+            this.TB_BUSQ.TabIndex = 2;
             this.TB_BUSQ.TextChanged += new System.EventHandler(this.TB_BUSQ_TextChanged);
             // 
             // label1
@@ -105,7 +105,7 @@
             this.CB_CD.Location = new System.Drawing.Point(427, 309);
             this.CB_CD.Name = "CB_CD";
             this.CB_CD.Size = new System.Drawing.Size(121, 24);
-            this.CB_CD.TabIndex = 2;
+            this.CB_CD.TabIndex = 3;
             this.CB_CD.SelectedIndexChanged += new System.EventHandler(this.CB_CD_SelectedIndexChanged);
             // 
             // label2
@@ -127,7 +127,7 @@
             this.DG_CLIENTES.RowHeadersWidth = 51;
             this.DG_CLIENTES.RowTemplate.Height = 24;
             this.DG_CLIENTES.Size = new System.Drawing.Size(583, 169);
-            this.DG_CLIENTES.TabIndex = 4;
+            this.DG_CLIENTES.TabIndex = 13;
             this.DG_CLIENTES.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_CLIENTES_CellContentClick);
             this.DG_CLIENTES.SelectionChanged += new System.EventHandler(this.DG_CLIENTES_SelectionChanged);
             // 
@@ -140,7 +140,7 @@
             this.DG_HOTELES.RowHeadersWidth = 51;
             this.DG_HOTELES.RowTemplate.Height = 24;
             this.DG_HOTELES.Size = new System.Drawing.Size(674, 174);
-            this.DG_HOTELES.TabIndex = 5;
+            this.DG_HOTELES.TabIndex = 14;
             this.DG_HOTELES.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_HOTELES_CellClick);
             this.DG_HOTELES.SelectionChanged += new System.EventHandler(this.DG_HOTELES_SelectionChanged);
             // 
@@ -169,7 +169,7 @@
             this.NUD_CANTHAB.Location = new System.Drawing.Point(91, 617);
             this.NUD_CANTHAB.Name = "NUD_CANTHAB";
             this.NUD_CANTHAB.Size = new System.Drawing.Size(120, 22);
-            this.NUD_CANTHAB.TabIndex = 12;
+            this.NUD_CANTHAB.TabIndex = 5;
             this.NUD_CANTHAB.ValueChanged += new System.EventHandler(this.NUD_CANTHAB_ValueChanged);
             // 
             // NUD_CANTPER
@@ -177,7 +177,7 @@
             this.NUD_CANTPER.Location = new System.Drawing.Point(91, 562);
             this.NUD_CANTPER.Name = "NUD_CANTPER";
             this.NUD_CANTPER.Size = new System.Drawing.Size(120, 22);
-            this.NUD_CANTPER.TabIndex = 13;
+            this.NUD_CANTPER.TabIndex = 4;
             this.NUD_CANTPER.ValueChanged += new System.EventHandler(this.NUD_CANTPER_ValueChanged);
             // 
             // DTP_ENTRADA
@@ -185,7 +185,7 @@
             this.DTP_ENTRADA.Location = new System.Drawing.Point(415, 592);
             this.DTP_ENTRADA.Name = "DTP_ENTRADA";
             this.DTP_ENTRADA.Size = new System.Drawing.Size(200, 22);
-            this.DTP_ENTRADA.TabIndex = 14;
+            this.DTP_ENTRADA.TabIndex = 7;
             this.DTP_ENTRADA.ValueChanged += new System.EventHandler(this.DTP_ENTRADA_ValueChanged);
             // 
             // label6
@@ -213,7 +213,7 @@
             this.DTP_SALIDA.Location = new System.Drawing.Point(415, 642);
             this.DTP_SALIDA.Name = "DTP_SALIDA";
             this.DTP_SALIDA.Size = new System.Drawing.Size(200, 22);
-            this.DTP_SALIDA.TabIndex = 16;
+            this.DTP_SALIDA.TabIndex = 8;
             this.DTP_SALIDA.ValueChanged += new System.EventHandler(this.DTP_SALIDA_ValueChanged);
             // 
             // label8
@@ -231,7 +231,7 @@
             this.TB_ANTICIPO.Location = new System.Drawing.Point(91, 669);
             this.TB_ANTICIPO.Name = "TB_ANTICIPO";
             this.TB_ANTICIPO.Size = new System.Drawing.Size(181, 22);
-            this.TB_ANTICIPO.TabIndex = 18;
+            this.TB_ANTICIPO.TabIndex = 6;
             this.TB_ANTICIPO.TextChanged += new System.EventHandler(this.TB_ANTICIPO_TextChanged);
             // 
             // BTN_RSV
@@ -240,7 +240,7 @@
             this.BTN_RSV.Location = new System.Drawing.Point(1279, 687);
             this.BTN_RSV.Name = "BTN_RSV";
             this.BTN_RSV.Size = new System.Drawing.Size(133, 37);
-            this.BTN_RSV.TabIndex = 20;
+            this.BTN_RSV.TabIndex = 9;
             this.BTN_RSV.Text = "RESERVAR";
             this.BTN_RSV.UseVisualStyleBackColor = true;
             this.BTN_RSV.Click += new System.EventHandler(this.BTN_RSV_Click);
@@ -254,7 +254,7 @@
             this.button4.Location = new System.Drawing.Point(12, 12);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(43, 35);
-            this.button4.TabIndex = 21;
+            this.button4.TabIndex = 12;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -267,7 +267,7 @@
             this.DG_CAR.RowHeadersWidth = 51;
             this.DG_CAR.RowTemplate.Height = 24;
             this.DG_CAR.Size = new System.Drawing.Size(300, 182);
-            this.DG_CAR.TabIndex = 54;
+            this.DG_CAR.TabIndex = 16;
             // 
             // DG_TIPOHAB
             // 
@@ -278,7 +278,7 @@
             this.DG_TIPOHAB.RowHeadersWidth = 51;
             this.DG_TIPOHAB.RowTemplate.Height = 24;
             this.DG_TIPOHAB.Size = new System.Drawing.Size(533, 174);
-            this.DG_TIPOHAB.TabIndex = 53;
+            this.DG_TIPOHAB.TabIndex = 15;
             this.DG_TIPOHAB.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_TIPOHAB_CellClick);
             this.DG_TIPOHAB.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DG_TIPOHAB_CellContentClick);
             this.DG_TIPOHAB.SelectionChanged += new System.EventHandler(this.DG_TIPOHAB_SelectionChanged);
@@ -349,7 +349,7 @@
             this.CB_BUSQ.Location = new System.Drawing.Point(557, 29);
             this.CB_BUSQ.Name = "CB_BUSQ";
             this.CB_BUSQ.Size = new System.Drawing.Size(121, 24);
-            this.CB_BUSQ.TabIndex = 61;
+            this.CB_BUSQ.TabIndex = 1;
             this.CB_BUSQ.SelectedIndexChanged += new System.EventHandler(this.CB_BUSQ_SelectedIndexChanged);
             // 
             // lbCost
@@ -391,7 +391,7 @@
             this.BTN_CLS.Location = new System.Drawing.Point(1140, 687);
             this.BTN_CLS.Name = "BTN_CLS";
             this.BTN_CLS.Size = new System.Drawing.Size(133, 37);
-            this.BTN_CLS.TabIndex = 65;
+            this.BTN_CLS.TabIndex = 10;
             this.BTN_CLS.Text = "LIMPIAR";
             this.BTN_CLS.UseVisualStyleBackColor = true;
             this.BTN_CLS.Click += new System.EventHandler(this.BTN_CLS_Click);
@@ -402,7 +402,7 @@
             this.BTN_CLF.Location = new System.Drawing.Point(557, 303);
             this.BTN_CLF.Name = "BTN_CLF";
             this.BTN_CLF.Size = new System.Drawing.Size(78, 37);
-            this.BTN_CLF.TabIndex = 66;
+            this.BTN_CLF.TabIndex = 11;
             this.BTN_CLF.Text = "LIMPIAR";
             this.BTN_CLF.UseVisualStyleBackColor = true;
             this.BTN_CLF.Click += new System.EventHandler(this.BTN_CLF_Click);
