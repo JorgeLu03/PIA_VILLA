@@ -141,7 +141,6 @@ namespace PIA_VILLA
                 _comandosql.Parameters.Add("@tel", SqlDbType.VarChar).Value = tel;
                 _comandosql.Parameters.Add("@contrasena", SqlDbType.VarChar, 20).Value = contrasena ?? (object)DBNull.Value;
 
-                // Ejecutar sin resultados
                 _comandosql.ExecuteNonQuery();
             }
             catch (SqlException ex)

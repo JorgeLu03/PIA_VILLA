@@ -111,13 +111,11 @@ namespace WindowsFormsApp1.PANTALLAS
 
         private void FormatearColumnasMonedaDG_TIPOHAB()
         {
-            // Ajusta el nombre de la columna según tu DataTable
             if (DG_TIPOHAB.Columns.Contains("Costo"))
             {
                 DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Format = "C2";
                 DG_TIPOHAB.Columns["Costo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             }
-            // Si tienes otras columnas monetarias, agrégalas aquí
         }
 
         private void DG_TIPOHAB_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -153,11 +151,9 @@ namespace WindowsFormsApp1.PANTALLAS
                 {
                     CB_CD.DataSource = ciudades;
                     CB_CD.DisplayMember = "Ciudad";
-                    // ¡Revisa aquí! ¿Hay alguna línea que manipule la selección o la fila actual de 'ciudades'?
                 }
                 else
                 {
-                    // Manejar el caso de no haber ciudades
                 }
             }
             catch (Exception ex)

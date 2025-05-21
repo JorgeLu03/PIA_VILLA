@@ -83,7 +83,7 @@ namespace WindowsFormsApp1.PANTALLAS
                     return;
                 }
 
-                string codRsv = DG_RSV.CurrentRow.Cells["CodRsv"].Value.ToString();
+                string codRsv = DG_RSV.CurrentRow.Cells["Código_de_Reservación"].Value.ToString();
                 DateTime fechaCheckIn = DateTime.Now;
                 fechaCheckIn = new DateTime(fechaCheckIn.Year, fechaCheckIn.Month, fechaCheckIn.Day, fechaCheckIn.Hour, fechaCheckIn.Minute, 0);
 

@@ -94,16 +94,12 @@
 
                     if (tablaHoteles != null && tablaHoteles.Rows.Count > 0)
                     {
-                        // Establece el DataSource del ComboBox
                         CB_HOTEL.DataSource = tablaHoteles;
 
-                        // Indica qué columna se mostrará al usuario
                         CB_HOTEL.DisplayMember = "Nombre";
 
-                        // Indica qué columna contendrá el valor real (el IDHotel)
                         CB_HOTEL.ValueMember = "IDHotel";
 
-                        // Opcional: Seleccionar el primer ítem
                         if (CB_HOTEL.Items.Count > 0)
                             CB_HOTEL.SelectedIndex = 0;
                     }

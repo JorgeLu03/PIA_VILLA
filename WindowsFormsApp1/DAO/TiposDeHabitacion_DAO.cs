@@ -32,8 +32,7 @@ namespace PIA_VILLA
             }
         }
 
-        // Método nuevo para cargar datos en un CheckedListBox
-        // En TiposDeHabitacion_DAO.cs
+ 
         public void CargarCLBAmenidades(CheckedListBox checkedListBox)
         {
             try
@@ -93,7 +92,6 @@ namespace PIA_VILLA
             return amenidadesIDs;
         }
 
-        // Dentro de tu clase TiposDeHabitacion_DAO
         public DataTable sp_GetTiposHabPorHotel(int idHotel, int opcion, int? idTipoHab = null)
         {
             DataTable dt = new DataTable();

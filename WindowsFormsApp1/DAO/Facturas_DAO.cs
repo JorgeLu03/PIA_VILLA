@@ -424,13 +424,6 @@ namespace PIA_VILLA
         }
 
 
-
-
-
-
-
-        // Dentro de tu clase Facturas_DAO.cs
-
         public DataTable GetDataForDG_VENTAS2(string pais, int año, string ciudad, string hotel)
         {
             try

@@ -307,7 +307,6 @@ namespace PIA_VILLA
             public DateTime? FechaSalida { get; set; }
         }
 
-        // En Reservaciones_DAO.cs, dentro de la clase Reservaciones_DAO
         public FechasReservacion GetFechasReservacion(string codRsv)
         {
             try
